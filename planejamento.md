@@ -2,12 +2,15 @@
 
 ## Indicies:
 
-[Objetivos](#objetivos)
-[Planejamento](#planejamentos)
-[Front-End](#front-end)
-[Back-End](#back-end)
+* [Objetivos](#objetivos)
+* [Planejamento](#planejamentos)
+    * [Front-End](#front-end)
+    * Páginas
+        * [Especificações das Páginas](especificacoes-das-paginas)
+<!-- * [Back-End](#back-end) -->
 
 ## Objetivos
+
 * Projetar um PDV
 * Preciso fazer o [Back-End](#back-end) (Principal objetivo)
   1. [Definir endpoints](#endpoints)
@@ -27,8 +30,8 @@ O projeto como um todo será um PDV, não precisará de um sistema muito robusto
     <li>/pdv/: Tela do PDV;</li>
     <li>/admin-registrar/: Tela de registrar novos administradores;</li>
     <li>/admin-login/: Tela de login do administrador;</li>
-    <li>/admin/: Tela de administrador;</li>
     <li>/admin-perfil/: Perfil do administrador;</li>
+    <li>/admin/: Tela de administrador;</li>
     <li>/estoque/: Consulta de produtos.</li>
 <ul>
 
@@ -98,6 +101,7 @@ O projeto como um todo será um PDV, não precisará de um sistema muito robusto
                 Nome ou SKU
             </dd>
         </dl>
+        Além disso, a um botão para visualizar o estoque.
     </dd>   
     <dt>
         <b>/admin-registrar/</b>
@@ -122,5 +126,11 @@ O projeto como um todo será um PDV, não precisará de um sistema muito robusto
     </dt>
     <dd>
         Página de gerenciamento do sistema.
+    </dd>
+    <dt>
+        <b>/estoque/</b>
+    </dt>
+    <dd>
+        Exibição de todo o estoque
     </dd>
 </dl>
