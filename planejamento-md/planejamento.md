@@ -6,41 +6,48 @@
 ## Indicies:
 
 * [Objetivos](#objetivos)
-* [Planejamento](#planejamentos)
-    * [Front-End](#front-end)
-    * [Páginas](#paginas)
-        * [Especificações das Páginas](especificacoes-das-paginas)
+* [Front-End](#front-end)
+* [Páginas](#paginas)
+    * [Especificações das Páginas](especificacoes-das-paginas)
 <!-- * [Back-End](#back-end) -->
 
 ## Objetivos
+O projeto como um todo será um PDV, não precisará de um sistema muito robusto para aguentar várias requeisições (pois só servirá para poucos funcionários) e não é preciso sistema de login e admin, sendo opcional.
 
 * Projetar um PDV
-* Preciso fazer o [Back-End](#back-end) (Principal objetivo)
-  1. [Definir endpoints](#endpoints)
 * Front-End HTML e CSS
+* Preciso fazer o [Back-End](#back-end) (Principal objetivo)
+    1. [Definir endpoints](#endpoints)
 
-## Planejamentos
-O projeto como um todo será um PDV, não precisará de um sistema muito robusto para aguentar várias requeisições (pois só servirá para poucos funcionários). 
-
-### Front-End
+## Front-End
 Interface constituída pelas linguagens: `HTML` (HyperText Markup Language), `CSS` (Cascading Style Sheets) e `JavaScript`.
 
-#### Páginas
+### Páginas
 As páginas necessárias são:
+
+#### Partes obrigatórias:
+
+<!-- As tags HTMLs foram utilizadas devido a necessidade de usar o atributo `id` para servir de âncora para link -->
+
 <ul>
     <li id="pg-home">/home : terá uma tela de boa vindas com botão de login;</li>
-    <li>/login: Tela de login para identificações do funcionário;</li>
-    <li>/registar: Registrar login;</li>
-    <li>/perfil: Perfil do funcionário com nível abaixo do aministrador (Futuramente será especificado os níveis de privilégios de administração);</li>
-    <li>/pdv: Tela do PDV;</li>
-    <li>/admin-registrar: Tela de registrar novos administradores;</li>
-    <li>/admin-login: Tela de login do administrador;</li>
-    <li>/admin-perfil: Perfil do administrador;</li>
-    <li>/admin: Tela de administrador;</li>
     <li>/estoque: Consulta de produtos.</li>
-<ul>
+</ul>
+
+#### Partes opcionais:
+
+* /login: Tela de login para identificações do funcionário;
+* /registar: Registrar login;
+* /perfil: Perfil do funcionário com nível abaixo do aministrador (Futuramente será especificado os níveis de privilégios de administração);
+* /pdv: Tela do PDV;
+* /admin-registrar: Tela de registrar novos administradores;
+* /admin-login: Tela de login do administrador;
+* /admin-perfil: Perfil do administrador;
+* /admin: Tela de administrador;
 
 ##### Especificações das Páginas
+
+
 <dl>
     <dt>
         <b>/home</b>
@@ -68,7 +75,7 @@ As páginas necessárias são:
             <li>Data de nascimento</li>
             <li>Sexo</li>
             <li>Senha</li>
-            <li>Conf. Senha</li>
+            <li>Conferir Senha</li>
         </ul>
         Preciso de uma confirmação 2FA obrigatória via E-mail por questão de segurança.
     </dd>
