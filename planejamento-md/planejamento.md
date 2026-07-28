@@ -165,12 +165,25 @@ As páginas ou Caminhos São dividos em duas tipos:
 </dl>
 
 ## Back-End
-Essa seção consiste em definir os endpoints e os seus verbos HTTP.
+Essa seção consiste em definir os endpoints e os seus verbos HTTP. 
 
+> [!NOTE]
+> Antes, é preciso difinir quais são os atributos de uma tabela no banco de dados.
 
 <dl>
     <dt>
         <b>/estoque</b>
     </dt>
-    
+    <dd>
+        <dt>
+            <b>Get</b>
+        </dt>
+        <dd>
+            <ul>
+                <li>
+                    Sem body ou query string na requisição: Retorna todos os Produtos
+                </li>
+            </ul>
+        </dd>
+    </dd>
 </dl>
