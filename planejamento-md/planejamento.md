@@ -4,48 +4,65 @@
 # Planejamento do projeto:
 
 ## Indicies:
-
-* [Objetivos](#objetivos)
-* [Front-End](#front-end)
-* [Páginas](#paginas)
-    * [Especificações das Páginas](especificacoes-das-paginas)
+Páginas/Caminhos
+* [Objetivo](#objetivo)
+* [Páginas/Caminhos](#paginas-caminhos)
+    * [Caminhos obrigatórios](#caminhos-obrigatorios)
+    * [Caminhos opcionais](#caminhos-opcionais)
+    * [Especificações das Páginas/Caminhos](#especificacoes-das-paginas-caminhos)
 <!-- * [Back-End](#back-end) -->
 
-## Objetivos
-O projeto como um todo será um PDV, não precisará de um sistema muito robusto para aguentar várias requeisições (pois só servirá para poucos funcionários) e não é preciso sistema de login e admin, sendo opcional.
+## Objetivo
+* Desenvolver um sistema Back-End PDV (Ponto de Venda). O PDV  pode ser entendido como o local da execução de uma venda (como a finalização de uma compra em um caixa de um supermercado), com o objetivo de apurar dados das vendas, implementar estátiscas de produtos, lucros etc.
+* O Back-End será feito com NodeJs com os módulos nativos para aprender a fundamento da ferramenta. Devido a isto, bíbliotecas externa como, Express, não serão utilizadas, porém excessões podem ser aplicadas para ferramentas de auxílio, como linters, JSDoc etc.
 
-* Projetar um PDV
-* Front-End HTML e CSS
-* Preciso fazer o [Back-End](#back-end) (Principal objetivo)
-    1. [Definir endpoints](#endpoints)
+## Tecnologías
+* Para a criação de interface do usuário ([`Front-End`](#front-end)):
+    * `HTML`
+    * `CSS`
+    * `JavaScript`
 
-## Front-End
-Interface constituída pelas linguagens: `HTML` (HyperText Markup Language), `CSS` (Cascading Style Sheets) e `JavaScript`.
+* Api Rest ([`Back-End`](#back-end)):
+    * `Node.js`
 
-### Páginas
-As páginas necessárias são:
+<!-- O link para esse subtítulo com a sinstaxe do markdown (##), não estava funcionando devido ao carctere "/". Por isso está sendo usado a tag HTML `h2` -->
+<h2 id="paginas-caminhos">
+    Páginas/Caminhos
+</h2>
 
-#### Partes obrigatórias:
+As páginas ou Caminhos São dividos em duas tipos:
+
+* [Caminhos obrigatórios](#caminhos-obrigatorios)
+* [Caminhos opcionais](#caminhos-opcionais)
+
+### Caminhos obrigatórios:
 
 <!-- As tags HTMLs foram utilizadas devido a necessidade de usar o atributo `id` para servir de âncora para link -->
-
 <ul>
-    <li id="pg-home">/home : terá uma tela de boa vindas com botão de login;</li>
-    <li>/estoque: Consulta de produtos.</li>
+    <li id="pg-home">
+        <b>/home</b> : terá uma tela de boa vindas com botão de login;
+    </li>
+    <li>
+        <b>/estoque:</b> Consulta de produtos.
+    </li>
+    <li>
+        <b>/pdv:</b> Tela do PDV;
+    </li>
 </ul>
 
-#### Partes opcionais:
+### Caminhos opcionais:
 
-* /login: Tela de login para identificações do funcionário;
-* /registar: Registrar login;
-* /perfil: Perfil do funcionário com nível abaixo do aministrador (Futuramente será especificado os níveis de privilégios de administração);
-* /pdv: Tela do PDV;
-* /admin-registrar: Tela de registrar novos administradores;
-* /admin-login: Tela de login do administrador;
-* /admin-perfil: Perfil do administrador;
-* /admin: Tela de administrador;
+* **/login:** Tela de login para identificações do funcionário;
+* **/registar:** Registrar login;
+* **/perfil:** Perfil do funcionário com nível abaixo do aministrador (Futuramente será especificado os níveis de privilégios de administração);
+* **/admin-registrar:** Tela de registrar novos administradores;
+* **/admin-login:** Tela de login do administrador;
+* **/admin-perfil:** Perfil do administrador;
+* **/admin:** Tela de administrador;
 
-##### Especificações das Páginas
+<h3 id="especificacoes-das-paginas-caminhos">
+    Especificações das Páginas/Caminhos
+</h3>
 
 
 <dl>
@@ -146,3 +163,5 @@ As páginas necessárias são:
         Exibição de todo o estoque
     </dd>
 </dl>
+
+<!-- ## Back-End -->
