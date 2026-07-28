@@ -164,4 +164,13 @@ As páginas ou Caminhos São dividos em duas tipos:
     </dd>
 </dl>
 
-<!-- ## Back-End -->
+## Back-End
+Essa seção consiste em definir os endpoints e os seus verbos HTTP.
+
+
+<dl>
+    <dt>
+        <b>/estoque</b>
+    </dt>
+    
+</dl>
