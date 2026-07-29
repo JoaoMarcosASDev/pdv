@@ -163,6 +163,28 @@ As páginas ou Caminhos São dividos em duas tipos:
         Exibição de todo o estoque
     </dd>
 </dl>
+## Banco de Dados
+O Banco de Dados tem duas opções para ambientes distintos:
+    * Local: SQLite 3
+    * Em Nuvem: PostgreSQL
+
+### Definições de Tabelas/Entidades
+
+
+<dl>
+<dt>funcionario</dt>
+<dd>
+
+* id: int
+
+|       **Nome**      | id  |     nome     | Nascimento |    cpf   |  email | telefone |
+|:-------------------:| --- | ------------ | ---------- | -------- | ------ | -------- |
+|       **Tipo**      | int | varchar(120) |    date    | char(11) | string | char(11) |
+|     **pode ser\
+        vazio**       | Não |      Não     |     Não    |    Não   |   Não  |   Não    |
+<!-- | **Restriç(ão/ões)** | -->
+</dd>
+</dl>
 
 ## Back-End
 Essa seção consiste em definir os endpoints e os seus verbos HTTP. 
