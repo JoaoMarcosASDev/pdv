@@ -163,6 +163,9 @@ Página de gerenciamento do sistema.
 </dl>
 
 ## Banco de Dados
+> [!info]
+> Os usuários do Banco de Dados serão definidos após o Back-End estiver funcionando, ou o projeto estiver mais avançado.
+
 O Banco de Dados tem duas opções para ambientes distintos:
     * Local: SQLite 3
     * Em Nuvem: PostgreSQL
