@@ -173,18 +173,61 @@ O Banco de Dados tem duas opções para ambientes distintos:
 
 <dl>
 <dt>funcionario</dt>
-<dd>
+<dd> <!-- Início definição funcionario -->
 > [!NOTE]
 > Os campos preenchidos com "`def. depois`" (definir depois), significam que o texto é extenso, logo é preciso descrever um páragrafo ao invez de estar no campo da tabela.
 
-|       **Nome**      |      id     |      nome      |  Nascimento  |     cpf      |    email     |   telefone   |
-|:-------------------:| ----------- | -------------- | ------------ | ------------ | ------------ | ------------ |
-|       **Tipo**      |      int    |  varchar(120)  |     date     |    char(11)  |    string    |    char(11)  |
+|       **Nome**      |      id     |      nome      |  nascimento  |     cpf      |    email     |   telefone   |    cargo    |
+|:-------------------:| ----------- | -------------- | ------------ | ------------ | ------------ | ------------ | ----------- |
+|       **Tipo**      |      int    |  varchar(120)  |     date     |    char(11)  |    string    |    char(11)  | foreign key
 |     **pode ser\
-        vazio**       |     Não     |      Não       |      Não     |      Não     |      Não     |      Não     |
-| **Restriç(ão/ões)** | Primary key | Somente letras | def. depois  | def. depois  | def. depois  | def. depois  |
+        vazio**       |     Não     |      Não       |      Não     |      Não     |      Não     |      Não     |             |
+| **Restriç(ão/ões)** | Primary key | Somente letras | def. depois  | def. depois  | def. depois  | def. depois  |             |
+
+#### Definições dos `def. depois`:
+
+<dl>
+
+<dt>nome</dt>
+<dd>
+
+Deve possuir no mínimo 10 caracteres alfabeticos e no máximo 120 (números, emojis etc. são proibidos), espaços, no início, no final ou duplos, ou mais, são proibidos.
 
 </dd>
+
+<dt>nascimento</dt>
+<dd>
+
+A data de nascimento deve realizar um cálculo para descobrir a idade atual do funcionário, caso seja menor que 16 Será negado.
+</dd>
+
+<dt>cpf</dt>
+<dd>
+
+> [!warning]
+> Requer conhecimento sobre validação deste campo. Devido a isto não será defindo no momento.
+
+</dd>
+
+<dt>email</dt>
+<dd>
+
+> [!warning]
+> Requer conhecimento sobre validação deste campo. Devido a isto não será defindo no momento.
+
+</dd>
+
+<dt>telefone</dt>
+<dd>
+
+> [!warning]
+> Requer conhecimento sobre validação deste campo. Devido a isto não será defindo no momento.
+
+</dd>
+
+</dl>
+
+</dd> <!-- Início definição funcionario -->
 </dl>
 
 ## Back-End
