@@ -174,15 +174,16 @@ O Banco de Dados tem duas opções para ambientes distintos:
 <dl>
 <dt>funcionario</dt>
 <dd>
+> [!NOTE]
+> Os campos preenchidos com "`def. depois`" (definir depois), significam que o texto é extenso, logo é preciso descrever um páragrafo ao invez de estar no campo da tabela.
 
-* id: int
-
-|       **Nome**      | id  |     nome     | Nascimento |    cpf   |  email | telefone |
-|:-------------------:| --- | ------------ | ---------- | -------- | ------ | -------- |
-|       **Tipo**      | int | varchar(120) |    date    | char(11) | string | char(11) |
+|       **Nome**      |      id     |      nome      |  Nascimento  |     cpf      |    email     |   telefone   |
+|:-------------------:| ----------- | -------------- | ------------ | ------------ | ------------ | ------------ |
+|       **Tipo**      |      int    |  varchar(120)  |     date     |    char(11)  |    string    |    char(11)  |
 |     **pode ser\
-        vazio**       | Não |      Não     |     Não    |    Não   |   Não  |   Não    |
-<!-- | **Restriç(ão/ões)** | -->
+        vazio**       |     Não     |      Não       |      Não     |      Não     |      Não     |      Não     |
+| **Restriç(ão/ões)** | Primary key | Somente letras | def. depois  | def. depois  | def. depois  | def. depois  |
+
 </dd>
 </dl>
 
