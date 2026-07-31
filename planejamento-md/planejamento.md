@@ -38,7 +38,10 @@ As páginas ou Caminhos São dividos em duas tipos:
 
 <!-- As tags HTMLs foram utilizadas devido a necessidade de usar o atributo `id` para servir de âncora para link -->
 <ul>
-<li id="pg-home">**/home:** terá uma tela de boa vindas com botão de login;</li>
+<li id="pg-home">
+
+**/home:** terá uma tela de boa vindas com botão de login;</li>
+
 <li>**/estoque:** Consulta de produtos.</li>
 <li>**/pdv:** Tela do PDV;</li>
 </ul>
