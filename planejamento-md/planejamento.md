@@ -1,3 +1,4 @@
+
 > [!NOTE]
 > O projeto como um todo é grande, então os assuntos abordados estão imcompletos/rasos.
 
@@ -128,13 +129,10 @@ Exibe as seguintes informações funcionário:
 * Nome
 * Data de nascimento
 * Sexo
-* nome   
-* nascimento
-* sexo   
-* cpf    
-* email   
-* telefone 
-* cargo   
+* CPF    
+* E-mail   
+* Telefone 
+* Cargo   
 
 Terá um botão/link de mudar os dados pessoais, contém os mesmo campos do [endpoint de registro](#registar)
 
@@ -262,96 +260,45 @@ O Banco de Dados tem duas opções para ambientes distintos:
 
 **Definições dos `def. depois`:**
 
-<dl>
-<dt>
-
 **nome**
-
-</dt>
-<dd>
 
 Deve possuir no mínimo 10 caracteres alfabeticos e no máximo 120 (números, emojis etc. são proibidos), espaços, no início, no final ou duplos, ou mais, são proibidos.
 
-</dd>
-
-<dt>
-
 **nascimento**
 
-</dt>
-<dd>
-
 A data de nascimento deve realizar um cálculo para descobrir a idade atual do funcionário, caso seja menor que 16 Será negado.
-</dd>
-
-<dt>
 
 **sexo**
-
-</dt>
-<dd>
 
 Aceita dois valores:
 
 * **"m"**: Sexo masculino;
 * **"f"**: Sexo feminino.
 
-<dt>
-
 **cpf**
 
-</dt>
-<dd>
 
 > [!warning]
 > Requer conhecimento sobre validação deste campo. Devido a isto não será defindo no momento.
 
-</dd>
-<dt>
 
 **email**
 
-</dt>
-<dd>
-
 > [!warning]
 > Requer conhecimento sobre validação deste campo. Devido a isto não será defindo no momento.
-
-</dd>
-
-<dt>
 
 **telefone**
 
-</dt>
-<dd>
-
 > [!warning]
 > Requer conhecimento sobre validação deste campo. Devido a isto não será defindo no momento.
 
-</dd>
-
-<dt>
 
 **cargo**
-
-</dt>
-<dd>
 
 É uma chave estrangeira (Um campo de um outra tabela)
 que se relaciona com a [tabela cargos](#cargos) no cammpo [cargo].
 
-</dd>
-</dl>
-
-</dd> <!-- Fim definição funcionario -->
-
-<dt id="cargos">
-
-**cargos**
-
-</dt>
-<dd> <!-- Início definição cargos -->
+<b id="cargos">**cargos**</b>
 
 | Nome |    Tipo     | Pode ser vazio |      Restrição    |
 |:----:|:-----------:|:--------------:|:-----------------:|
@@ -381,14 +328,24 @@ Essa seção consiste em definir os endpoints e os seus verbos HTTP.
 
 <dt>
 
-**Get**
 
 </dt>
 <dd>
 
-* Sem body ou query string na requisição: Retorna todos os Produtos
+> [!info]
+> Não requer privilégios de administrador.
 
-</dd>
+**Get**
+
+* Sem body ou query string na requisição: Retorna todos os Produtos
+* Body com nome, tags, ou SKU: retorna determinado produto.
+
+**POST**
+
+> [!info]
+> Não requer privilégios de administrador.
+
+
 
 </dd>
 </dl>
