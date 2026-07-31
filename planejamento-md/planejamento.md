@@ -40,10 +40,21 @@ As páginas ou Caminhos São dividos em duas tipos:
 <ul>
 <li id="pg-home">
 
-**/home:** terá uma tela de boa vindas com botão de login;</li>
+**/home:** terá uma tela de boa vindas com botão de login;
 
-<li>**/estoque:** Consulta de produtos.</li>
-<li>**/pdv:** Tela do PDV;</li>
+</li>
+
+<li>
+
+**/estoque:** Consulta de produtos.
+
+</li>
+
+<li>
+
+**/pdv:** Tela do PDV;
+
+</li>
 </ul>
 
 ### Caminhos opcionais:
@@ -61,13 +72,21 @@ As páginas ou Caminhos São dividos em duas tipos:
 
 
 <dl>
-<dt>**/home**</dt>
+<dt>
+
+**/home**
+
+</dt>
 <dd>
 
 Leia sobre na seção sobre na seção de [páginas home](#pg-home)
 
 </dd>
-<dt>**/login**</dt>
+<dt>
+
+**/login**
+
+</dt>
 <dd>
 
 Possuíra campos de e-mail e senha do funcionário
@@ -77,7 +96,11 @@ e um link para registrar funcionários.
 
 </dd>
 
-<dt>**/registar**</dt>
+<dt>
+
+**/registar**
+
+</dt>
 <dd>
 
 Possuíra os seguinte campos:
@@ -93,7 +116,11 @@ Possuíra os seguinte campos:
 > Preciso de uma confirmação 2FA obrigatória via E-mail por questão de segurança.
 </dd>
 
-<dt>**/perfil**</dt>
+<dt>
+
+**/perfil**
+
+</dt>
 <dd>
 
 Exibe as seguintes informações funcionário:
@@ -112,12 +139,21 @@ Exibe as seguintes informações funcionário:
 Terá um botão/link de mudar os dados pessoais, contém os mesmo campos do [endpoint de registro](#registar)
 
 </dd>
-<dt>**/pdv**</dt>
+
+<dt>
+
+**/pdv**
+
+</dt>
 <dd>
 
 O própro pdv, onde fica a tela de venda e pesquisa dos produtos, havendo duas seções:
 <dl> <!-- Início Especificação dos elementos do pdv -->
-<dt>**Pesquisa de estoque:**<dt>
+<dt>
+
+**Pesquisa de estoque:**
+
+<dt>
 <dd>
 
 Traz informções de um determinado produto.
@@ -125,7 +161,11 @@ Possui uma entrada texto para pesquisa por nome, tags, ou SKU.
 
 </dd>
 
-<dt>**Entrada dos produtos a serem vendidos:**</dt>
+<dt>
+
+**Entrada dos produtos a serem vendidos:**
+
+</dt>
 <dd>
 
 Nome ou SKU 
@@ -133,35 +173,56 @@ Além disso, a um botão para visualizar o estoque.
 
 </dd>
 </dl> <!-- Fim Especificação dos elementos do pdv -->
-<dt>**/admin-registrar**</dt>
+
+<dt>
+
+**/admin-registrar**
+    
+</dt>
 <dd>
 
 Página para criar administradores. Possui as os mesmos campos do [login de funcionários](#registrar) comum, porém necessita de privilégios de administrador para criar.
 
 </dd>
 
-<dt>**/admin-login**</dt>
+<dt>
+
+**/admin-login**
+
+</dt>
 <dd>
 
 Funciona da mesma forma do <a href="#login">login de um funcionário</a>
 
 </dd>
 
-<dt>**/admin-perfil**</dt>
+<dt>
+
+**/admin-perfil**
+
+</dt>
 <dd>
 
 Reapreveita os tipos de informações exibidas no [perfil do usuário](#perfil) com a excessão que mostra os seus privilégios de administrador
 
 </dd>
 
-<dt>**/admin**</dt>
+<dt>
+
+**/admin**
+
+</dt>
 <dd>
 
 Página de gerenciamento do sistema.
 
 </dd>
 
-<dt>**/estoque**</dt>
+<dt>
+
+**/estoque**
+
+</dt>
 <dd>Exibição de todo o estoque</dd>
 </dl>
 
@@ -176,10 +237,16 @@ O Banco de Dados tem duas opções para ambientes distintos:
 ### Definições de Tabelas/Entidades
 
 <dl>
-<dt>**funcionario**</dt>
+<dt>
+
+**funcionario**
+
+</dt>
 <dd> <!-- Início definição funcionario -->
+
 > [!NOTE]
 > Os campos preenchidos com "`def. depois`" (definir depois), significam que o texto é extenso, logo é preciso descrever um páragrafo ao invez de estar no campo da tabela.
+
 **Campos**
 
 |    Nome    |     Tipo     | Pode ser vazio |  Restriç(ão/ões)  |
@@ -196,19 +263,32 @@ O Banco de Dados tem duas opções para ambientes distintos:
 **Definições dos `def. depois`:**
 
 <dl>
-<dt>**nome**</dt>
+<dt>
+
+**nome**
+
+</dt>
 <dd>
 
 Deve possuir no mínimo 10 caracteres alfabeticos e no máximo 120 (números, emojis etc. são proibidos), espaços, no início, no final ou duplos, ou mais, são proibidos.
 
 </dd>
 
-<dt>**nascimento**</dt>
+<dt>
+
+**nascimento**
+
+</dt>
 <dd>
 
 A data de nascimento deve realizar um cálculo para descobrir a idade atual do funcionário, caso seja menor que 16 Será negado.
 </dd>
-<dt>sexo</dt>
+
+<dt>
+
+**sexo**
+
+</dt>
 <dd>
 
 Aceita dois valores:
@@ -216,14 +296,22 @@ Aceita dois valores:
 * **"m"**: Sexo masculino;
 * **"f"**: Sexo feminino.
 
-<dt>**cpf**</dt>
+<dt>
+
+**cpf**
+
+</dt>
 <dd>
 
 > [!warning]
 > Requer conhecimento sobre validação deste campo. Devido a isto não será defindo no momento.
 
 </dd>
-<dt>**email**</dt>
+<dt>
+
+**email**
+
+</dt>
 <dd>
 
 > [!warning]
@@ -231,7 +319,11 @@ Aceita dois valores:
 
 </dd>
 
-<dt>**telefone**</dt>
+<dt>
+
+**telefone**
+
+</dt>
 <dd>
 
 > [!warning]
@@ -239,7 +331,11 @@ Aceita dois valores:
 
 </dd>
 
-<dt>**cargo**</dt>
+<dt>
+
+**cargo**
+
+</dt>
 <dd>
 
 É uma chave estrangeira (Um campo de um outra tabela)
@@ -248,10 +344,13 @@ que se relaciona com a [tabela cargos](#cargos) no cammpo [cargo].
 </dd>
 </dl>
 
-
 </dd> <!-- Fim definição funcionario -->
 
-<dt id="cargos">**cargos**</dt>
+<dt id="cargos">
+
+**cargos**
+
+</dt>
 <dd> <!-- Início definição cargos -->
 
 | Nome |    Tipo     | Pode ser vazio |      Restrição    |
@@ -273,19 +372,23 @@ Essa seção consiste em definir os endpoints e os seus verbos HTTP.
 > Antes, é preciso difinir quais são os atributos de uma tabela no banco de dados.
 
 <dl>
-    <dt>
-        <b>/estoque</b>
-    </dt>
-    <dd>
-        <dt>
-            <b>Get</b>
-        </dt>
-        <dd>
-            <ul>
-                <li>
-                    Sem body ou query string na requisição: Retorna todos os Produtos
-                </li>
-            </ul>
-        </dd>
-    </dd>
+<dt>
+
+**/estoque**
+
+</dt>
+<dd>
+
+<dt>
+
+**Get**
+
+</dt>
+<dd>
+
+* Sem body ou query string na requisição: Retorna todos os Produtos
+
+</dd>
+
+</dd>
 </dl>
