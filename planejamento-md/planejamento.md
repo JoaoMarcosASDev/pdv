@@ -292,27 +292,81 @@ Aceita dois valores:
 > [!warning]
 > Requer conhecimento sobre validação deste campo. Devido a isto não será defindo no momento.
 
-</dd> <!-- Fim definição funcionario -->
-<dt>
-   
 **cargo**
 
-</dt>
-<dd> <!-- Início definição cargo -->
 É uma chave estrangeira (Um campo de um outra tabela)
-que se relaciona com a [tabela cargos](#cargos) no cammpo [cargo].
+que se relaciona com a [tabela cargos](#cargos) no campo.
 
-<b id="cargos">**cargos**</b>
+</dd> <!-- Fim definição funcionario -->
+<dt>
+
+ <b id="cargos">cargos</b>
+
+</dt>
+<dd> <!-- Início definição cargos -->
 
 | Nome |    Tipo     | Pode ser vazio |      Restrição    |
 |:----:|:-----------:|:--------------:|:-----------------:|
 |  id  |     int     |                | Pr_key auto_incr. |
 | nome | varchar(30) |      Não       |    Unique Key     |
 
-**Cargo pré-definidos**
+**Cargo(s) pré-definido(s)**
 
 * Adiministrador(a)
-</dd> <!-- Fim definição funcionario -->
+</dd> <!-- Fim definição cargos -->
+
+<dt>
+
+**produtos**
+
+</dt>
+<dd>
+
+|    Nome    |     Tipo    | Pode ser vazio |         Restrição        |
+|:----------:|:-----------:|:--------------:|:------------------------:|
+|     id     |     int     |                |     Pr_key auto_incr.    |
+|    nome    | varchar(50) |       Não      |        Unique Key        |
+| quantidade |     int     |       Não      |                          |
+|    tags    | varchar(15) |       Não      |       def. depois         |
+| quantidade |     int     |       Não      |   Números não negativos  |
+|    tags    | varchar(15) |       Não      |      Somente letras      |
+|    sku     |  varchar(6) |       Não      | Sem caracteres especiais |
+
+**Definiç(ão/ões) dos `def. depois`:**
+
+**tags** 
+
+Não é aceito carctere especial com excessão do "-" e "\_".
+Caracteres de espaços não são permitidos.
+
+</dd>
+</dl>
+
+## Back-End
+Essa seção consiste em definir os endpoints e os seus verbos HTTP. 
+
+> [!NOTE]
+> Antes, é preciso difinir quais são os atributos de uma tabela no banco de dados.
+
+<dl>
+<dt>
+
+**/estoque**
+
+</dt>
+<dd>
+
+> [!NOTE]
+> Não requer privilégios de administrador.
+
+**Get**
+
+* Sem body ou query string na requisição: Retorna todos os Produtos
+* Body com Não | Somente letras |
+|    sku     |  varchar(6) |Não | |
+
+
+</dd>
 </dl>
 
 ## Back-End
