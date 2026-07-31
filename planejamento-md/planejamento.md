@@ -1,4 +1,3 @@
-
 > [!NOTE]
 > O projeto como um todo é grande, então os assuntos abordados estão imcompletos/rasos.
 
@@ -225,12 +224,13 @@ Página de gerenciamento do sistema.
 </dl>
 
 ## Banco de Dados
-> [!info]
+
+> [!NOTE]
 > Os usuários do Banco de Dados serão definidos após o Back-End estiver funcionando, ou o projeto estiver mais avançado.
 
 O Banco de Dados tem duas opções para ambientes distintos:
-    * Local: SQLite 3
-    * Em Nuvem: PostgreSQL
+* Local: SQLite 3
+* Em Nuvem: PostgreSQL
 
 ### Definições de Tabelas/Entidades
 
@@ -292,9 +292,13 @@ Aceita dois valores:
 > [!warning]
 > Requer conhecimento sobre validação deste campo. Devido a isto não será defindo no momento.
 
-
+</dd> <!-- Fim definição funcionario -->
+<dt>
+   
 **cargo**
 
+</dt>
+<dd> <!-- Início definição cargo -->
 É uma chave estrangeira (Um campo de um outra tabela)
 que se relaciona com a [tabela cargos](#cargos) no cammpo [cargo].
 
@@ -308,8 +312,7 @@ que se relaciona com a [tabela cargos](#cargos) no cammpo [cargo].
 **Cargo pré-definidos**
 
 * Adiministrador(a)
-
-</dd> <!-- Fim definição cargos -->
+</dd> <!-- Fim definição funcionario -->
 </dl>
 
 ## Back-End
@@ -326,13 +329,7 @@ Essa seção consiste em definir os endpoints e os seus verbos HTTP.
 </dt>
 <dd>
 
-<dt>
-
-
-</dt>
-<dd>
-
-> [!info]
+> [!NOTE]
 > Não requer privilégios de administrador.
 
 **Get**
@@ -342,9 +339,8 @@ Essa seção consiste em definir os endpoints e os seus verbos HTTP.
 
 **POST**
 
-> [!info]
-> Não requer privilégios de administrador.
-
+> [!NOTE]
+> Requer privilégio(s) de administrador(a)
 
 
 </dd>
