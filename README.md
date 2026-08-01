@@ -6,6 +6,9 @@ Um PDV (Ponto de Venda), é um software que oferece uma interface para auxiliar 
 
 Consequêntimente reduz gastos, e facilita nas tomadas de decisões.
 
+> [!Note]
+> [Clique aqui para ver o planejamento e as especificações do projeto](./planejamento-md/planejamento.md)
+
 ### O que é necessário
 * Armazenamento de Banco de Dados local com possibilidade de migrar para a nuvem:
     Armazenamento:
