@@ -1,4 +1,4 @@
-# PDV Simples
+# PDV
 
 Este é um projeto para portfólio Full-Stack focado no Back-End.
 
