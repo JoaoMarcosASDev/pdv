@@ -383,19 +383,23 @@ Essa seção consiste em definir os endpoints e os seus verbos HTTP.
 </dt>
 <dd>
 
-> [!NOTE]
-> Não requer privilégios de administrador.
+
 
 **Get**
 
-* Sem body ou query string na requisição: Retorna todos os Produtos
-* Body com nome, tags, ou SKU: retorna determinado produto.
+Não requer privilégios de administrador.
+
+Operações:
+
+* Mostrar todos os produtos: requisição sem body ou query string;
+* Mostrar um produto específico: requisição de nome, tags, ou SKU via query string.
 
 **POST**
 
-> [!NOTE]
-> Requer privilégio(s) de administrador(a)
+Requer privilégio(s) de administrador(a) para realizar as operações: 
 
+Operações:
 
+* Adicionar Produto: 
 </dd>
 </dl>
