@@ -40,6 +40,7 @@ class CriarTabelas {
             cpf        CHAR(11)     NOT NULL,
             email      VARCHAR(120) NOT NULL,
             telefone   CHAR(11)     NOT NULL,
+            senha      varchar(120) NOT NULL,
             cargoId    VARCHAR(30)  NOT NULL REFERENCES cargos(id),
             CONSTRAINT ck_sexo_opcoes CHECK((sexo) ),
             CONSTRAINT ck_sexo_opcoes CHECK(lower(sexo) REGEXP '[fm]'),
