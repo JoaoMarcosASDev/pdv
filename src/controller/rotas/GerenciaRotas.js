@@ -1,62 +1,58 @@
-import ProdutosRota from "#rotas/produtos/ProdutosRota.js";
+import EstoqueRota from "#rotas/estoque/EstoqueRota.js";
 
 export default class GerenciaRotas {
-    // Private propetiers/verbs
-    #verb;
+    // Private propetiers/verbo
+    #verbo;
     #endpointReq;
-    #response;
-    #content;
+    #resposta;
+    #conteudo;
 
     #endpoints = {
         // "/": obj
-        "/produtos": ProdutosRota
-    }
+        "/estoque": EstoqueRota
+    };
 
     /**
      * @method
      * @return boolean
      */
-    #endpointReqExists() {
+    #endpointReqExiste() {
 
-        // Get array of endpoints
+        // Array de chaves
         const keysEndpoints = Object.keys(this.#endpoints);
         
-        // Ckeck if endpoinst requested exists
+        // Verifica se o endpoint requisitado existe
         return keysEndpoints.includes(this.#endpointReq);
     }
 
-    constructor(verb, endpointReq, response, content = undefined) {
-        this.#verb = verb.toLowerCase();
+    constructor(verbo, endpointReq, resposta, conteudo = undefined) {
+        this.#verbo= verbo.toLowerCase();
         this.#endpointReq = endpointReq;
-        this.#response = response;
-        this.#content = content
+        this.#resposta = resposta;
+        this.#conteudo = conteudo;
     }
     
-    /**
-     * Execute requested processing
-     * @verb
-     */
     exec() {
-        if(!this.#endpointReqExists()) {
+        if(!this.#endpointReqExiste()) {
             const msg = {
-                message: "Opss, página não encontrada..."
+                mensagem: "Opss, página não encontrada..."
             };
 
             const headers = {
-                "Content-Type": "json/plain",
-                "Content-Lenth": Buffer.byteLength(msg.message)
+                "conteudo-Type": "json/plain",
+                "conteudo-Lenth": Buffer.byteLength(msg.mensagem)
             };
 
-            this.#response.writeHead(200, headers).end(JSON.stringify(msg));
+            this.#resposta.writeHead(200, headers).end(JSON.stringify(msg));
             return;
         } 
 
-        // Get the suitable Static Class 
-        const RouteObj = this.#endpoints[this.#endpointReq];
+        // Pega a Static Class adequada
+        const RotaObj = this.#endpoints[this.#endpointReq];
 
-        // Get the Static Method whose matches with requested verb
-        const routeObj = RouteObj[this.#verb];
+        // Chama o método estático de acordo com o verbo HTTP requisitado
+        const rotaVerboMetod = RotaObj[this.#verbo];
 
-        routeObj(this.#response);
+       rotaVerboMetod(this.#resposta);
     }
 }

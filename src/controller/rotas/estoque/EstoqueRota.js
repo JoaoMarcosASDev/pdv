@@ -4,7 +4,7 @@
  * Atende aos métodos HTTP requesitados no endpoint `produtos`
  * @namespace ProdutosRotas
  */
-export default class ProdutosRotas {
+export default class EstoqueRota {
     /**
      * Retorna o get sem requisitar paramatros, retornando a página ao cliente
      * @method GET

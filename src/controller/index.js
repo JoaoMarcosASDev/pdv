@@ -1,12 +1,12 @@
 import { createServer } from "http";
 import GerenciaRotas from "#rotas/GerenciaRotas.js";
 
-const port = 3000;
+const porta = 3000;
 
-const server = createServer((req, res) => {
-    const router = new GerenciaRotas(req.method, req.url, res);
-    router.exec();
+const servidor = createServer((req, res) => {
+    const gerenciaRotas = new GerenciaRotas(req.method, req.url, res);
+    gerenciaRotas.exec();
 });
 
-server.listen(port, () =>
-    console.log(`Rodando em http://localhost:${ port }/`));
+servidor.listen(porta, () =>
+    console.log(`Rodando em http://localhost:${ porta}/`));
