@@ -1,4 +1,4 @@
-import bd from "#bdConexao/bdConexao.js";
+//import bd from "#bdConexao/bdConexao.js";
 
 /**
  * Atende aos métodos HTTP requesitados no endpoint `produtos`

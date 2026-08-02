@@ -7,12 +7,12 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "start": "node --env-file-if-exists=.env ./src/index.js"
+    "start": "node --env-file-if-exists=.env ./src/controller/index.js"
   },
   "imports": {
-    "#bdConexao/*.js": "./src/bdConexao/*.js",
-    "#rotas/": "./src/rotas/",
-    "#rotas/*.js": "./src/rotas/*.js"
+    "#bdConexao/*.js": "./src/model/bdConexao/*.js",
+    "#rotas/": "./src/controller/rotas/",
+    "#rotas/*.js": "./src/controller/rotas/*.js"
   },
   "devDependencies": {
     "jsdoc": "^4.0.5"
