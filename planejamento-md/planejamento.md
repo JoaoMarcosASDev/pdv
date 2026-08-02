@@ -383,9 +383,6 @@ Essa seção consiste em definir os endpoints e os seus verbos HTTP.
 </dt>
 <dd>
 
-<<<<<<< HEAD
-
-
 **Get**
 
 Não requer privilégios de administrador.
