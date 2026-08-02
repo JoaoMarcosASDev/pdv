@@ -249,14 +249,14 @@ O Banco de Dados tem duas opções para ambientes distintos:
 
 |    Nome    |     Tipo     | Pode ser vazio |  Restriç(ão/ões)  |
 |:----------:|:------------:|:--------------:|:-----------------:|
-|     id     |     int      |                |  Pr_key auto_incr.|
-|    nome    | varchar(120) |      Não       |   Somente letras  |
-| nascimento |     date     |      Não       |    def. depois    |
-|    sexo    |    char(1)   |      Não       | check("m" \| "f") |
-|    cpf     |   char(11)   |      Não       |    def. depois    |
-|   email    | varchar(120) |      Não       |    def. depois    |
-|  telefone  |   char(11)   |      Não       |    def. depois    |
-|   cargo    |  varchar(30) |      Não       |    Foreign Key    |
+|     id     |   INTEGER    |                |  Pr_key auto_incr.|
+|    nome    | VARCHAR(120) |      Não       |   Somente letras  |
+| nascimento |     DATE     |      Não       |    def. depois    |
+|    sexo    |    CHAR(1)   |      Não       | check("m" \| "f") |
+|    cpf     |   CHAR(11)   |      Não       |    def. depois    |
+|   email    | VARCHAR(120) |      Não       |    def. depois    |
+|  telefone  |   CHAR(11)   |      Não       |    def. depois    |
+|   cargo    |  VARCHAR(30) |      Não       |    Foreign Key    |
 
 **Definições dos `def. depois`:**
 
@@ -308,7 +308,7 @@ que se relaciona com a [tabela cargos](#cargos) no campo.
 | Nome |    Tipo     | Pode ser vazio |      Restrição    |
 |:----:|:-----------:|:--------------:|:-----------------:|
 |  id  |     int     |                | Pr_key auto_incr. |
-| nome | varchar(30) |      Não       |    Unique Key     |
+| nome | varchar(30) |      Não       |    Unique         |
 
 **Cargo(s) pré-definido(s)**
 
@@ -325,11 +325,9 @@ que se relaciona com a [tabela cargos](#cargos) no campo.
 |    Nome    |     Tipo    | Pode ser vazio |         Restrição        |
 |:----------:|:-----------:|:--------------:|:------------------------:|
 |     id     |     int     |                |     Pr_key auto_incr.    |
-|    nome    | varchar(50) |       Não      |        Unique Key        |
-| quantidade |     int     |       Não      |                          |
-|    tags    | varchar(15) |       Não      |       def. depois         |
+|    nome    | varchar(50) |       Não      |          Unique          |
 | quantidade |     int     |       Não      |   Números não negativos  |
-|    tags    | varchar(15) |       Não      |      Somente letras      |
+|    tags    | varchar(20) |                |       def. depois        |
 |    sku     |  varchar(6) |       Não      | Sem caracteres especiais |
 
 **Definiç(ão/ões) dos `def. depois`:**
