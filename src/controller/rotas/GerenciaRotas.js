@@ -4,12 +4,12 @@ export default class GerenciaRotas {
     // Private propetiers/verbo
     #verbo;
     #endpointReq;
-    #resposta;
-    #conteudo;
+    #req;
+    #res;
 
     #endpoints = {
         // "/": obj
-        "/estoque": EstoqueRota
+        "/estoque/": EstoqueRota
     };
 
     /**
@@ -25,25 +25,26 @@ export default class GerenciaRotas {
         return keysEndpoints.includes(this.#endpointReq);
     }
 
-    constructor(verbo, endpointReq, resposta, conteudo = undefined) {
-        this.#verbo= verbo.toLowerCase();
-        this.#endpointReq = endpointReq;
-        this.#resposta = resposta;
-        this.#conteudo = conteudo;
+    constructor(req, res) {
+        this.#req = req;
+        this.#verbo= req.method.toLowerCase();
+        this.#endpointReq = req.url.endsWith('/') ? req.url.toLowerCase() : req.url.toLowerCase() + '/';
+        this.#res = res;
     }
     
     exec() {
         if(!this.#endpointReqExiste()) {
+            console.log(this.#verbo, '\n', this.#endpointReq)
             const msg = {
                 mensagem: "Opss, página não encontrada..."
             };
 
             const headers = {
-                "conteudo-Type": "json/plain",
-                "conteudo-Lenth": Buffer.byteLength(msg.mensagem)
+                "content-Type": "json/plain",
+                "content-Lenth": Buffer.byteLength(msg.mensagem)
             };
 
-            this.#resposta.writeHead(200, headers).end(JSON.stringify(msg));
+            this.#res.writeHead(200, headers).end(JSON.stringify(msg));
             return;
         } 
 
@@ -53,6 +54,6 @@ export default class GerenciaRotas {
         // Chama o método estático de acordo com o verbo HTTP requisitado
         const rotaVerboMetod = RotaObj[this.#verbo];
 
-       rotaVerboMetod(this.#resposta);
+       rotaVerboMetod(this.#req, this.#res);
     }
 }

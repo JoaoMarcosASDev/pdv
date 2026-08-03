@@ -4,7 +4,7 @@ import GerenciaRotas from "#rotas/GerenciaRotas.js";
 const porta = 3000;
 
 const servidor = createServer((req, res) => {
-    const gerenciaRotas = new GerenciaRotas(req.method, req.url, res);
+    const gerenciaRotas = new GerenciaRotas(req, res);
     gerenciaRotas.exec();
 });
 

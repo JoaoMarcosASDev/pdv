@@ -317,7 +317,7 @@ que se relaciona com a [tabela cargos](#cargos) no campo.
 
 <dt>
 
-**produtos**
+<b id="produtos">produtos</b>
 
 </dt>
 <dd>
@@ -394,8 +394,7 @@ Operações:
 
 Requer privilégio(s) de administrador(a) para realizar as operações: 
 
-Operações:
-
 * Adicionar Produto: 
+    Deve fornecer todos as [propriedades da entidade produtos](#produtos) no body da requisição.
 </dd>
 </dl>
