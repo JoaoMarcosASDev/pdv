@@ -1,5 +1,3 @@
-import bd from "#bdConexao/BdConexao.js";
-import IProdutos from "#model/entities/IProdutos.js"
 /**
  * Atende aos métodos HTTP requisitados no endpoint `produtos`
  * @namespace ProdutosRotas
@@ -11,9 +9,7 @@ export default class EstoqueRota {
      * @method GET
      * @param {http.Serverres}
      */
-    static get(_, res) {
-        const getProds = bd.prepare("SELECT * FROM produtos");
-        console.log(getProds.all())
+    get(_, res, conexao = undefined) {
         const msg = [{ message: "Página produtos"}]; //{ getProds.all() }
         const stringMsg = JSON.stringify(msg);
         const headers = {
@@ -24,24 +20,27 @@ export default class EstoqueRota {
         res.writeHead(200, headers).end(stringMsg);
     }
 
-    static post(req, res) {
+    post(req, res, conexao) {
         let body = "";
-        
+
         req.on("data", (chunck) => {
             body += chunck
         } 
         );
-
+       
         req.on("end", () => {
+            conexao = new conexao(process.env.URL_BD);
             const bodyJson = JSON.parse(body);
-            const { nome, quantidade } = bodyJson[0];
-            
+            const { nome, quantidade, sku } = bodyJson[0];
+            // Esse inserte foi feito para testar
+            const queryInsert =
+                `INSERT INTO produtos(nome, quantidade, sku)
+            VALUES (?, ?, ?)`;
+
+            const insertPrep = conexao.prepare(queryInsert);
+            insertPrep.run(nome, quantidade, sku);
+            conexao.close();
         });
-        const queryInsert =
-            `INSERT INTO produtos(nome, quantidade)
-            VALUES (?, ?)`;
-        const insertPrep = bd.prepare(queryInsert);
-        insertPrep.run(nome, quantidade);
         const msg = { message: "Chegou no post" };
         const stringMsg = JSON.stringify(msg);
         const headers = {

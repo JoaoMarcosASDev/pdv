@@ -1,5 +1,5 @@
 import EstoqueRota from "#rotas/estoque/EstoqueRota.js";
-
+import BdConexao from "#bdConexao/BdConexao.js";
 export default class GerenciaRotas {
     // Private propetiers/verbo
     #verbo;
@@ -34,7 +34,6 @@ export default class GerenciaRotas {
     
     exec() {
         if(!this.#endpointReqExiste()) {
-            console.log(this.#verbo, '\n', this.#endpointReq)
             const msg = {
                 mensagem: "Opss, página não encontrada..."
             };
@@ -46,13 +45,11 @@ export default class GerenciaRotas {
 
             this.#res.writeHead(200, headers).end(JSON.stringify(msg));
             return;
-            
         } 
 
-        const rotaObj = this.#endpoints[this.#endpointReq];
+        const rotaObj = new this.#endpoints[this.#endpointReq]();
+        const rotaVerboMetodo = rotaObj[this.#verbo];
 
-        const rotaVerboMetod = rotaObj[this.#verbo];
-
-       rotaVerboMetod(this.#req, this.#res);
+        rotaVerboMetodo(this.#req, this.#res, BdConexao);
     }
 }

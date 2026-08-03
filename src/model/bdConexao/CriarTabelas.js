@@ -1,22 +1,7 @@
-import { DatabaseSync } from "node:sqlite";
+import BdConexao from "#bdConexao/BdConexao.js";
 
 class CriarTabelas {
     #conexao;
-
-    #funcSqlite = {
-        TEMNUM: function(str) {
-            const nums = [0,1,2,3,4,5,6,7,8,9]
-            for (let num of objCorres[tipos])
-                if(str.includes(num))
-                    return 1;
-            return 0;
-        },
-        REGEXP: function(str, reg) {
-            reg = new RegExp(reg);
-            const result = reg.test(str);
-            return new Number(result).valueOf();
-        }
-    };
 
     #createTableQuery =
         `
@@ -45,7 +30,7 @@ class CriarTabelas {
             quantidade INTEGER CHECK (quantidade >= 0),
             tags       VARCHAR(20),
             sku        CHAR(6)
-            CONSTRAINT ch_sku_tem_numeros CHECK(TEMNUM(sku)) 
+            CONSTRAINT ch_sku_tem_numeros CHECK(NOT TEMNUM(sku)) 
          );
 `;
 
@@ -53,13 +38,10 @@ class CriarTabelas {
     // Estou com dificuldade em implementar
 
     constructor(url = ":memory:") {
-        this.#conexao = new DatabaseSync(url);
+        this.#conexao = new BdConexao(url);
     }
 
     create() {
-        for (const [chave, valor] of Object.entries(this.#funcSqlite)) 
-            this.#conexao.function(chave, valor);
-        
         this.#conexao.exec(this.#createTableQuery);
 
         this.#conexao.close();
