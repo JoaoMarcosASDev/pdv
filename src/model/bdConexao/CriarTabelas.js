@@ -20,35 +20,33 @@ class CriarTabelas {
 
     #createTableQuery =
         `
-        BEGIN;
+        CREATE TABLE IF NOT EXISTS funcionario (
+           id         INTEGER      PRIMARY KEY,
+           nome       VARCHAR(120) NOT NULL CHECK(nome >= 10),
+           sexo       CHAR(1)      NOT NULL, -- Constraint definida em baixo
+           cpf        CHAR(11)     NOT NULL,
+           email      VARCHAR(120) NOT NULL,
+           telefone   CHAR(11)     NOT NULL,
+           senha      varchar(120) NOT NULL,
+           cargoId    VARCHAR(30)  NOT NULL REFERENCES cargos(id),
+           CONSTRAINT ch_sexo_opcoes CHECK((sexo) ),
+           CONSTRAINT ch_sexo_opcoes CHECK(lower(sexo) REGEXP '[fm]'),
+           CONSTRAINT ch_sexo_letra_deve_ser_minuscula CHECK(sexo REGEXP '[fm]')
+        );
+
         CREATE TABLE IF NOT EXISTS cargos (
-            id   INTEGER PRIMARY KEY,
-            nome VARCHAR(30) NOT NULL UNIQUE
-         );
-            
-         CREATE TABLE IF NOT EXISTS produtos (
+           id   INTEGER PRIMARY KEY,
+           nome VARCHAR(30) NOT NULL UNIQUE
+        );
+
+        CREATE TABLE IF NOT EXISTS produtos (
             id         INTEGER PRIMARY KEY,
             nome       VARCHAR(50) NOT NULL UNIQUE,
-            quantidade INTEGER CHECK(quantidade >= 0),
+            quantidade INTEGER CHECK (quantidade >= 0),
             tags       VARCHAR(20),
-            sku        VARCHAR(6),
+            sku        CHAR(6)
             CONSTRAINT ch_sku_tem_numeros CHECK(TEMNUM(sku)) 
          );
-
-         CREATE TABLE IF NOT EXISTS funcionario (
-            id         INTEGER      PRIMARY KEY,
-            nome       VARCHAR(120) NOT NULL CHECK(nome >= 10),
-            sexo       CHAR(1)      NOT NULL, -- Constraint defina em baixo
-            cpf        CHAR(11)     NOT NULL,
-            email      VARCHAR(120) NOT NULL,
-            telefone   CHAR(11)     NOT NULL,
-            senha      varchar(120) NOT NULL,
-            cargoId    VARCHAR(30)  NOT NULL REFERENCES cargos(id),
-            CONSTRAINT ck_sexo_opcoes CHECK((sexo) ),
-            CONSTRAINT ck_sexo_opcoes CHECK(lower(sexo) REGEXP '[fm]'),
-            CONSTRAINT ck_sexo_letra_deve_ser_minuscula CHECK(sexo REGEXP '[fm]')
-         );
-        COMMIT;
 `;
 
         // A restrição de um de carcteres se aplicarão no back-end.
@@ -59,7 +57,7 @@ class CriarTabelas {
     }
 
     create() {
-        for(const [chave, valor] of Object.entries(this.#funcSqlite)) 
+        for (const [chave, valor] of Object.entries(this.#funcSqlite)) 
             this.#conexao.function(chave, valor);
         
         this.#conexao.exec(this.#createTableQuery);
