@@ -19,7 +19,9 @@ class CriarTabelas {
     };
 
     #createTableQuery =
-        `CREATE TABLE IF NOT EXISTS cargos (
+        `
+        BEGIN;
+        CREATE TABLE IF NOT EXISTS cargos (
             id   INTEGER PRIMARY KEY,
             nome VARCHAR(30) NOT NULL UNIQUE
          );
@@ -28,8 +30,8 @@ class CriarTabelas {
             id         INTEGER PRIMARY KEY,
             nome       VARCHAR(50) NOT NULL UNIQUE,
             quantidade INTEGER CHECK(quantidade >= 0),
-            tags       VARCHAR(20) NOT NULL UNIQUE,
-            sku        VARCHAR(6) NOT NULL,
+            tags       VARCHAR(20),
+            sku        VARCHAR(6),
             CONSTRAINT ch_sku_tem_numeros CHECK(TEMNUM(sku)) 
          );
 
@@ -45,7 +47,9 @@ class CriarTabelas {
             CONSTRAINT ck_sexo_opcoes CHECK((sexo) ),
             CONSTRAINT ck_sexo_opcoes CHECK(lower(sexo) REGEXP '[fm]'),
             CONSTRAINT ck_sexo_letra_deve_ser_minuscula CHECK(sexo REGEXP '[fm]')
-         );`;
+         );
+        COMMIT;
+`;
 
         // A restrição de um de carcteres se aplicarão no back-end.
     // Estou com dificuldade em implementar
@@ -64,5 +68,5 @@ class CriarTabelas {
     }
 }
 
-const criarTabelas = new CriarTabelas(process.env.URL_DB);
+const criarTabelas = new CriarTabelas(process.env.URL_BD);
 criarTabelas.create();

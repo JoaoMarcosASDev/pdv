@@ -7,12 +7,14 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "start": "node --env-file-if-exists=.env ./src/controller/index.js"
+    "start": "node --watch --env-file-if-exists=.env ./src/controller/index.js",
+    "criarTabelas": "node ./src/model/bdConexao/CriarTabelas.js"
   },
   "imports": {
     "#bdConexao/*.js": "./src/model/bdConexao/*.js",
     "#rotas/": "./src/controller/rotas/",
-    "#rotas/*.js": "./src/controller/rotas/*.js"
+    "#rotas/*.js": "./src/controller/rotas/*.js",
+    "#model/entities/*.js": "./src/model/entities/*.js"
   },
   "devDependencies": {
     "jsdoc": "^4.0.5"

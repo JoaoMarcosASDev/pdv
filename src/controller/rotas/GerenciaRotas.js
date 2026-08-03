@@ -46,13 +46,12 @@ export default class GerenciaRotas {
 
             this.#res.writeHead(200, headers).end(JSON.stringify(msg));
             return;
+            
         } 
 
-        // Pega a Static Class adequada
-        const RotaObj = this.#endpoints[this.#endpointReq];
+        const rotaObj = this.#endpoints[this.#endpointReq];
 
-        // Chama o método estático de acordo com o verbo HTTP requisitado
-        const rotaVerboMetod = RotaObj[this.#verbo];
+        const rotaVerboMetod = rotaObj[this.#verbo];
 
        rotaVerboMetod(this.#req, this.#res);
     }

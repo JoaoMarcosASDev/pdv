@@ -395,6 +395,6 @@ Operações:
 Requer privilégio(s) de administrador(a) para realizar as operações: 
 
 * Adicionar Produto: 
-    Deve fornecer todos as [propriedades da entidade produtos](#produtos) no body da requisição.
+    O cliente deve fornecer todos as [propriedades da entidade produtos](#produtos) no body da requisição.
 </dd>
 </dl>
