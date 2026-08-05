@@ -1,5 +1,6 @@
 import EstoqueRota from "#rotas/estoque/EstoqueRota.js";
 import BdConexao from "#bdConexao/BdConexao.js";
+
 export default class GerenciaRotas {
     // Private propetiers/verbo
     #verbo;

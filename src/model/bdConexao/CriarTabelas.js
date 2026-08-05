@@ -3,6 +3,21 @@ import BdConexao from "#bdConexao/BdConexao.js";
 class CriarTabelas {
     #conexao;
 
+    #tebelasNecessariaExistem (...tabelasNome) {
+        // Váriavel para armazenar uma lista de valores para a query;
+        let listaValores = "(";
+        // Itera até o pnúltimo indicie;
+        for (let i = 0; i < tabelasNome.length - 1; i++)
+            listaValores += `'${tabelasNome[i]}', `;
+
+        // Adiciona o último elemento;
+        listaValores += `'${tabelasNome[tabelasNome.length - 1]}')`;
+
+        const prepareSelect = this.#conexao.prepare(`SELECT CASE valor WHEN ${tabelasNome.length} THEN 1 ELSE 0 END AS resultado FROM (SELECT sum(CASE WHEN name IN ${listaValores} THEN 1 ELSE 0 END) as valor FROM (SELECT name FROM sqlite_master WHERE TYPE = 'table'));`);
+        // Convert para boolean
+        return Boolean(prepareSelect.all());
+    }
+
     #createTableQuery =
         `
         CREATE TABLE IF NOT EXISTS funcionario (
@@ -41,12 +56,15 @@ class CriarTabelas {
         this.#conexao = new BdConexao(url);
     }
 
-    create() {
-        this.#conexao.exec(this.#createTableQuery);
+    exec() {
+        console.log(this.#conexao.prepare("SELECT name FROM sqlite_master").all());
 
+        if(this.#tebelasNecessariaExistem())
+            this.#conexao.exec(this.#createTableQuery);
+        
         this.#conexao.close();
     }
 }
 
-const criarTabelas = new CriarTabelas(process.env.URL_BD);
-criarTabelas.create();
+const criarTabelas = new CriarTabelas();
+criarTabelas.exec();
