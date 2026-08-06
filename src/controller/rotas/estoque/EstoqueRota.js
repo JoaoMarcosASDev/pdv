@@ -10,12 +10,18 @@ export default class EstoqueRota {
      * @param {http.Serverres}
      */
     get(_, res, conexao = undefined) {
+        if (conexao) { 
+            conexao = new conexao();
+            console.log(conexao.prepare("SELECT name FROM sqlite_master WHERE type = 'table'").all());
+            conexao.close();
+        }
         const msg = [{ message: "Página produtos"}]; //{ getProds.all() }
         const stringMsg = JSON.stringify(msg);
         const headers = {
             "Content-Type": "text/json",
             "Content-Length": Buffer.byteLength(stringMsg),
         };
+        
         
         res.writeHead(200, headers).end(stringMsg);
     }
@@ -27,27 +33,31 @@ export default class EstoqueRota {
             body += chunck
         } 
         );
-       
+        
+        let msg, statusCode;
         req.on("end", () => {
-            conexao = new conexao(process.env.URL_BD);
             const bodyJson = JSON.parse(body);
             const { nome, quantidade, sku } = bodyJson[0];
-            // Esse inserte foi feito para testar
+
             const queryInsert =
                 `INSERT INTO produtos(nome, quantidade, sku)
             VALUES (?, ?, ?)`;
 
+            conexao = new conexao();
+
             const insertPrep = conexao.prepare(queryInsert);
-            insertPrep.run(nome, quantidade, sku);
+            insertPrep.run();
+
             conexao.close();
         });
-        const msg = { message: "Chegou no post" };
-        const stringMsg = JSON.stringify(msg);
+
+        msg = JSON.stringify(msg);
+
         const headers = {
             "Content-Type": "text/json",
-            "Content-Length": Buffer.byteLength(stringMsg),
+            "Content-Length": Buffer.byteLength(msg),
         };
         
-        res.writeHead(201, headers).end(stringMsg);
+        res.writeHead(statusCode, headers).end(stringMsg);
     }
 }

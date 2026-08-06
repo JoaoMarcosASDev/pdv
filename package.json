@@ -12,9 +12,10 @@
   },
   "imports": {
     "#bdConexao/*.js": "./src/model/bdConexao/*.js",
+    "#errosController/*.js": "./src/controller/erros/*.js",
+    "#model/entidades/*.js": "./src/model/entidades/IProdutos.js",
     "#rotas/": "./src/controller/rotas/",
-    "#rotas/*.js": "./src/controller/rotas/*.js",
-    "#model/entities/*.js": "./src/model/entities/*.js"
+    "#rotas/*.js": "./src/controller/rotas/*.js"
   },
   "devDependencies": {
     "jsdoc": "^4.0.5"

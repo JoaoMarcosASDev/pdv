@@ -1,22 +1,5 @@
-import BdConexao from "#bdConexao/BdConexao.js";
-
-class CriarTabelas {
+export default class CriarTabelas {
     #conexao;
-
-    #tebelasNecessariaExistem (...tabelasNome) {
-        // Váriavel para armazenar uma lista de valores para a query;
-        let listaValores = "(";
-        // Itera até o pnúltimo indicie;
-        for (let i = 0; i < tabelasNome.length - 1; i++)
-            listaValores += `'${tabelasNome[i]}', `;
-
-        // Adiciona o último elemento;
-        listaValores += `'${tabelasNome[tabelasNome.length - 1]}')`;
-
-        const prepareSelect = this.#conexao.prepare(`SELECT CASE valor WHEN ${tabelasNome.length} THEN 1 ELSE 0 END AS resultado FROM (SELECT sum(CASE WHEN name IN ${listaValores} THEN 1 ELSE 0 END) as valor FROM (SELECT name FROM sqlite_master WHERE TYPE = 'table'));`);
-        // Convert para boolean
-        return Boolean(prepareSelect.all());
-    }
 
     #createTableQuery =
         `
@@ -39,32 +22,45 @@ class CriarTabelas {
            nome VARCHAR(30) NOT NULL UNIQUE
         );
 
-        CREATE TABLE IF NOT EXISTS produtos (
-            id         INTEGER PRIMARY KEY,
-            nome       VARCHAR(50) NOT NULL UNIQUE,
-            quantidade INTEGER CHECK (quantidade >= 0),
-            tags       VARCHAR(20),
-            sku        CHAR(6)
-            CONSTRAINT ch_sku_tem_numeros CHECK(NOT TEMNUM(sku)) 
-         );
-`;
+            CREATE TABLE IF NOT EXISTS produtos (
+                id         INTEGER PRIMARY KEY,
+                nome       VARCHAR(50) NOT NULL UNIQUE,
+                quantidade INTEGER CHECK (quantidade >= 0) NOT NULL,
+                tags       VARCHAR(20),
+                sku        CHAR(6),
+                CONSTRAINT ch_sku_tem_numeros CHECK(NOT TEMNUM(sku))
+             );
+    `;
 
-        // A restrição de um de carcteres se aplicarão no back-end.
-    // Estou com dificuldade em implementar
+    #tebelasNecessariasExistem (...tabelasNome) {
+        // Váriavel para armazenar uma lista de valores para a query;
+        let listaValores = "(";
+        // Itera até o pnúltimo indicie;
+        for (let i = 0; i < tabelasNome.length - 1; i++)
+            listaValores += `'${tabelasNome[i]}', `;
 
-    constructor(url = ":memory:") {
-        this.#conexao = new BdConexao(url);
-    }
+        // Adiciona o último elemento;
+        listaValores += `'${tabelasNome[tabelasNome.length - 1]}')`;
 
-    exec() {
-        console.log(this.#conexao.prepare("SELECT name FROM sqlite_master").all());
+        this.#conexao = new this.#conexao();
+        const prepareSelect = this.#conexao.prepare(`SELECT CASE valor WHEN ${tabelasNome.length} THEN 1 ELSE 0 END AS resultado FROM (SELECT sum(CASE WHEN name IN ${listaValores} THEN 1 ELSE 0 END) as valor FROM (SELECT name FROM sqlite_master WHERE TYPE = 'table'));`);
 
-        if(this.#tebelasNecessariaExistem())
+        if (prepareSelect.all())
             this.#conexao.exec(this.#createTableQuery);
-        
+
         this.#conexao.close();
     }
-}
 
-const criarTabelas = new CriarTabelas();
-criarTabelas.exec();
+
+    constructor(conexao) {
+        this.#conexao = conexao;
+    }
+    // A restrição de um de carcteres se aplicarão no back-end.
+    // Estou com dificuldade em implementar
+
+    exec() {
+        const nomesTabelaProjeto = ["funcionario", "cargos", "produtos"];
+
+        this.#tebelasNecessariasExistem(nomesTabelaProjeto) 
+    }
+}
