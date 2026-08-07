@@ -3,33 +3,31 @@ export default class CriarTabelas {
 
     #createTableQuery =
         `
-        CREATE TABLE IF NOT EXISTS funcionario (
-           id         INTEGER      PRIMARY KEY,
-           nome       VARCHAR(120) NOT NULL CHECK(nome >= 10),
-           sexo       CHAR(1)      NOT NULL, -- Constraint definida em baixo
-           cpf        CHAR(11)     NOT NULL,
-           email      VARCHAR(120) NOT NULL,
-           telefone   CHAR(11)     NOT NULL,
-           senha      varchar(120) NOT NULL,
-           cargoId    VARCHAR(30)  NOT NULL REFERENCES cargos(id),
-           CONSTRAINT ch_sexo_opcoes CHECK((sexo) ),
-           CONSTRAINT ch_sexo_opcoes CHECK(lower(sexo) REGEXP '[fm]'),
+        CREATE TABLE IF NOT EXISTS funcionarios (
+           id         INTEGER  PRIMARY KEY,
+           nome       TEXT     NOT NULL CHECK(length(nome) >= 10 AND length(nome) <= 120),
+           sexo       CHAR(1)  NOT NULL, -- Constraint definida em baixo
+           cpf        TEXT     NOT NULL,
+           email      TEXT     NOT NULL CHECK(length(email) <= 120),
+           telefone   TEXT     NOT NULL CHECK(length = 11),
+           senha      TEXT     NOT NULL CHECK(length(senha) <= 20),
+           cargoId    INTEGER  NOT NULL REFERENCES cargos(id), CONSTRAINT ch_sexo_opcoes CHECK(lower(sexo) REGEXP '[fm]'),
            CONSTRAINT ch_sexo_letra_deve_ser_minuscula CHECK(sexo REGEXP '[fm]')
-        );
+        ) STRICT;
 
         CREATE TABLE IF NOT EXISTS cargos (
            id   INTEGER PRIMARY KEY,
            nome VARCHAR(30) NOT NULL UNIQUE
-        );
+        ) STRICT;
 
-            CREATE TABLE IF NOT EXISTS produtos (
-                id         INTEGER PRIMARY KEY,
-                nome       VARCHAR(50) NOT NULL UNIQUE,
-                quantidade INTEGER CHECK (quantidade >= 0) NOT NULL,
-                tags       VARCHAR(20),
-                sku        CHAR(6),
-                CONSTRAINT ch_sku_tem_numeros CHECK(NOT TEMNUM(sku))
-             );
+        CREATE TABLE IF NOT EXISTS produtos (
+            id         INTEGER PRIMARY KEY,
+            nome       VARCHAR(50) NOT NULL UNIQUE,
+            quantidade INTEGER CHECK (quantidade >= 0) NOT NULL,
+            tags       VARCHAR(20),
+            sku        CHAR(6),
+            CONSTRAINT ch_sku_tem_numeros CHECK(NOT TEMNUM(sku))
+         ) STRICT;
     `;
 
     #tebelasNecessariasExistem (...tabelasNome) {

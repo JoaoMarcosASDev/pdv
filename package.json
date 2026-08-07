@@ -14,6 +14,7 @@
     "#bdConexao/*.js": "./src/model/bdConexao/*.js",
     "#errosController/*.js": "./src/controller/erros/*.js",
     "#model/entidades/*.js": "./src/model/entidades/IProdutos.js",
+    "#model/validacoes/*.js": "./src/model/validacoes/*.js",
     "#rotas/": "./src/controller/rotas/",
     "#rotas/*.js": "./src/controller/rotas/*.js"
   },

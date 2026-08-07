@@ -1,3 +1,5 @@
+import EstoqueRotaValidacoes from "#model/validacoes/EstoqueRotaValidacoes.js";
+
 /**
  * Atende aos métodos HTTP requisitados no endpoint `produtos`
  * @namespace ProdutosRotas
@@ -27,16 +29,18 @@ export default class EstoqueRota {
     }
 
     post(req, res, conexao) {
-        let body = "";
-
+        //let body = "";
+/*
         req.on("data", (chunck) => {
             body += chunck
-        } 
-        );
+        });
+        */
+
         
-        let msg, statusCode;
+/*
         req.on("end", () => {
             const bodyJson = JSON.parse(body);
+            
             const { nome, quantidade, sku } = bodyJson[0];
 
             const queryInsert =
@@ -50,14 +54,22 @@ export default class EstoqueRota {
 
             conexao.close();
         });
+        */
+        const vaEstoque = new EstoqueRotaValidacoes(conexao);
 
+        let msg, statusCode;
+
+        msg = { menssagem: "Uma mensagem" };
         msg = JSON.stringify(msg);
+
+        statusCode = 201;
 
         const headers = {
             "Content-Type": "text/json",
             "Content-Length": Buffer.byteLength(msg),
         };
         
-        res.writeHead(statusCode, headers).end(stringMsg);
+        res.writeHead(statusCode, headers).end(msg);
+
     }
 }
