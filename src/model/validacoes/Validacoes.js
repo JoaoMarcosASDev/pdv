@@ -4,19 +4,28 @@ export default class Validacoes {
     #tabelaInfo;
 
     #pegarTabelaInfo() {
-        this.#conexao = new this.#conexao();
-        console.log(this.#conexao);
-        const pragmaPrepare = this.#conexao.prepare(`PRAGMA table_info(${this.#nomeTabela})`);
+        const conexao = new this.#conexao();
 
-        return pragmaPrepare.all();
+        const pragmaPrepare = conexao.prepare(`PRAGMA table_info(${this.#nomeTabela})`);
+        const result = pragmaPrepare.all();
 
-        this.#conexao.close();
+        conexao.close();
+
+        return result;
+    }
+
+    #convertTiposSqliteParaJS() {
+        const tabelaInfoObj = this.#pegarTabelaInfo();
     }
 
     constructor(nomeTabela, conexao) {
+        console.log(conexao);
         this.#nomeTabela = nomeTabela;
         this.#conexao = conexao;
         this.#tabelaInfo = this.#pegarTabelaInfo();
+    }
+    exec() {
+        this.#convertTiposSqliteParaJS();
     }
     
     utltrapassouTamanhoMaxCarac(str, length) {

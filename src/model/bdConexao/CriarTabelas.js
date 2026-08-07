@@ -3,29 +3,31 @@ export default class CriarTabelas {
 
     #createTableQuery =
         `
+        
         CREATE TABLE IF NOT EXISTS funcionarios (
            id         INTEGER  PRIMARY KEY,
-           nome       TEXT     NOT NULL CHECK(length(nome) >= 10 AND length(nome) <= 120),
-           sexo       CHAR(1)  NOT NULL, -- Constraint definida em baixo
-           cpf        TEXT     NOT NULL,
-           email      TEXT     NOT NULL CHECK(length(email) <= 120),
-           telefone   TEXT     NOT NULL CHECK(length = 11),
-           senha      TEXT     NOT NULL CHECK(length(senha) <= 20),
-           cargoId    INTEGER  NOT NULL REFERENCES cargos(id), CONSTRAINT ch_sexo_opcoes CHECK(lower(sexo) REGEXP '[fm]'),
+           nome       TEXT     NOT NULL CHECK(length(nome) BETWEEN 10 AND 120),
+           sexo       TEXT     NOT NULL CHECK(length(sexo) = 1),
+           cpf        TEXT     NOT NULL CHECK(length(cpf) = 11),
+           email      TEXT     NOT NULL,
+           telefone   TEXT     NOT NULL CHECK(length(telefone) BETWEEN 11 AND 9), -- Deve possui o DDD com e o carcter 9
+           senha      TEXT     NOT NULL CHECK(length(senha) BETWEEN 8 AND 20),
+           cargoId    INTEGER  NOT NULL REFERENCES cargos(id),
+           CONSTRAINT ch_sexo_opcoes    CHECK(lower(sexo) REGEXP '[fm]'),
            CONSTRAINT ch_sexo_letra_deve_ser_minuscula CHECK(sexo REGEXP '[fm]')
         ) STRICT;
 
         CREATE TABLE IF NOT EXISTS cargos (
            id   INTEGER PRIMARY KEY,
-           nome VARCHAR(30) NOT NULL UNIQUE
+           nome TEXT NOT NULL UNIQUE CHECK(length(nome) BETWEEN 2 AND 30)
         ) STRICT;
 
         CREATE TABLE IF NOT EXISTS produtos (
             id         INTEGER PRIMARY KEY,
-            nome       VARCHAR(50) NOT NULL UNIQUE,
-            quantidade INTEGER CHECK (quantidade >= 0) NOT NULL,
-            tags       VARCHAR(20),
-            sku        CHAR(6),
+            nome       TEXT    NOT NULL UNIQUE CHECK(length(nome) BETWEEN 1 AND 50),
+            quantidade INTEGER NOT NULL CHECK (quantidade >= 0),
+            tags       TEXT CHECK(length(tags) <= 20),
+            sku        TEXT CHECK(length(sku) = 6),
             CONSTRAINT ch_sku_tem_numeros CHECK(NOT TEMNUM(sku))
          ) STRICT;
     `;

@@ -8,7 +8,7 @@ const porta = 3000;
 const servidor = createServer((req, res) => {
     const criarTabelas = new CriarTabelas(BdConexao);
     criarTabelas.exec();
-    const gerenciaRotas = new GerenciaRotas(req, res);
+    const gerenciaRotas = new GerenciaRotas(req, res, BdConexao);
     gerenciaRotas.exec();
 });
 

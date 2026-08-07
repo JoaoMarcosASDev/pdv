@@ -1,5 +1,4 @@
 import EstoqueRota from "#rotas/estoque/EstoqueRota.js";
-import BdConexao from "#bdConexao/BdConexao.js";
 
 export default class GerenciaRotas {
     // Private propetiers/verbo
@@ -7,6 +6,7 @@ export default class GerenciaRotas {
     #endpointReq;
     #req;
     #res;
+    #conexao;
 
     #endpoints = {
         // "/": obj
@@ -26,11 +26,12 @@ export default class GerenciaRotas {
         return keysEndpoints.includes(this.#endpointReq);
     }
 
-    constructor(req, res) {
+    constructor(req, res, conexao) {
         this.#req = req;
+        this.#res = res;
+        this.#conexao = conexao;
         this.#verbo= req.method.toLowerCase();
         this.#endpointReq = req.url.endsWith('/') ? req.url.toLowerCase() : req.url.toLowerCase() + '/';
-        this.#res = res;
     }
     
     exec() {
@@ -51,6 +52,6 @@ export default class GerenciaRotas {
         const rotaObj = new this.#endpoints[this.#endpointReq]();
         const rotaVerboMetodo = rotaObj[this.#verbo];
 
-        rotaVerboMetodo(this.#req, this.#res, BdConexao);
+        rotaVerboMetodo(this.#req, this.#res, this.#conexao);
     }
 }
