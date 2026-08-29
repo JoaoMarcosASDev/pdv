@@ -1,8 +1,9 @@
 import { DatabaseSync } from "node:sqlite";
 
-export default class BdConexao extends DatabaseSync {
-    #funcSqlite = {
-        TEMNUM: function(str) {
+export default class  {
+    #connectionUrlStr = '';
+    #funcsSqlite = {
+        CONTAINSNUM: function(str) {
             if(!str)
                 return 0;
             const nums = [0,1,2,3,4,5,6,7,8,9]
@@ -19,13 +20,20 @@ export default class BdConexao extends DatabaseSync {
         }
     };
 
-    constructor() {
-        super(process.env.URL_BD);
+    constructor(connectionUrlStr) {
+        this.#connectionUrlStr = connectionUrlStr;
 
         // A cada abertura da conexão com o banco de dado é necessário adicionar as funções persolizadas, pois após a conexão fechar, com o método "close()" e a mesma instância for reaberta, com o método "open()", acarretará em um erro, pois as funções não estarão definidas no banco de dados. Para que isso não aconteça, a conexão é aberta sempre que esta classe for instanciada e uma vez a conexão fechada não deve ser reaberta, mas sim ser criada uma nova instância ou optar por adicionar novamente as funções.
 
-        for (const [chave, valor] of Object.entries(this.#funcSqlite)) {
-            super.function(chave, valor);
+    }
+
+    connect() {
+        const connect = new DatabaseSync(this.#connectionUrlStr);
+
+        for (const [key, value] of Object.entries(this.#funcsSqlite)) {
+            connect.function(key, value);
         }
+
+        return connect;
     }
 }

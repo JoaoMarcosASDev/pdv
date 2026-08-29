@@ -7,18 +7,15 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "start": "node --watch --env-file-if-exists=.env ./src/controller/index.js",
+    "start": "node --watch --env-file-if-exists=.env ./src/index.js",
     "criarTabelas": "node --env-file-if-exists=.env ./src/model/bdConexao/CriarTabelas.js"
   },
   "imports": {
-    "#bdConexao/*.js": "./src/model/bdConexao/*.js",
+    "#bdConnection/*.js": "./src/model/dbConnection/*.js",
     "#errosController/*.js": "./src/controller/erros/*.js",
-    "#model/entidades/*.js": "./src/model/entidades/IProdutos.js",
-    "#model/validacoes/*.js": "./src/model/validacoes/*.js",
-    "#rotas/": "./src/controller/rotas/",
-    "#rotas/*.js": "./src/controller/rotas/*.js"
-  },
-  "devDependencies": {
-    "jsdoc": "^4.0.5"
+    "#model/validations/erros/*.js": "./src/model/validations/erros/Erros.js ",
+    "#model/validations/*.js": "./src/model/validations/*.js",
+    "#Router.js": "./src/controller/Router.js",
+    "#routes/*.js": "./src/controller/routes/*.js"
   }
 }
