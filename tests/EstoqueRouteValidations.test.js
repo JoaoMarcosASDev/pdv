@@ -6,12 +6,12 @@ import { strictEqual } from 'node:assert';
 
 describe('Testing name validation', (t) => {
     const { name } = productEntity;
-    it('Valid product name', () => {
-        EstoqueRouteValidations.validateName('CafeAmor 10mg');
-    });
+    
+    // it('Content', () => {
+    //     EstoqueRouteValidations.validateName('CafeAmor 10mg');
+    // });
 
-    let isTypeCorrectBoll;
-    describe(`Not ${name.type} type entries:`, (t) => {
+    describe(`Applying invalid types (The valid type is a ${name.type})`, (t) => {
         it('Number', { expectFailure: true }, () => {
             EstoqueRouteValidations.validateName(1);
         });
@@ -24,14 +24,28 @@ describe('Testing name validation', (t) => {
             EstoqueRouteValidations.validateName(new Object());
         });
     });
-
-    describe('Must failure when:', () => {
-        it('Not null', { expectFailure: true }, () => {
+    
+    describe(`Argument content`, () => {
+        it('Is null', { expectFailure: true }, () => {
             EstoqueRouteValidations.validateName('');
         });
 
-        it(`Is Character Lenth between ${ name.minCharacLength } and ${ name.maxCharacLength }`, { expectFailure: true }, () => {
-            EstoqueRouteValidations.validateName('Macarrao Bem Preparo, o melhor que voce vera na sua vida');
+        describe('Boundery test', () => {
+            it('Minimun character length value', () => {
+                EstoqueRouteValidations.validateName('s');
+            });
+
+            it('Max character length value', () => {
+                EstoqueRouteValidations.validateName('Macarrao Bem Preparo, o melhor que voce vera 500mg');
+            });
+
+            it('Medium character length value', () => {
+                EstoqueRouteValidations.validateName('Arroz Brancho 500mg');
+            })
+        });
+
+        it(`exceed charcter length (The max length is ${ name.maxCharactLength })`, { expectFailure: true }, () => {
+            EstoqueRouteValidations.validateName('Macarrao Bem Preparo, o melhor que voce vera na sua vida 500kg');
         });
     });
 });

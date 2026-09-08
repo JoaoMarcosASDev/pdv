@@ -6,7 +6,7 @@ export default class {
     #createTableQuery =
         `
         CREATE TABLE IF NOT EXISTS employees (
-           id               INTEGER  PRIMARY KEY,
+           id               INTEGER   PRIMARY KEY,
            name              TEXT     NOT NULL CHECK(length(name) BETWEEN 10 AND 120),
            sex               TEXT     NOT NULL CHECK(length(sex) = 1),
            cpf               TEXT     NOT NULL CHECK(length(cpf) = 11),

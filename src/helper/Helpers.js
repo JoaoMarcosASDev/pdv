@@ -5,15 +5,12 @@ export default class {
         let errorObj;
 
         if(typeof num !== 'number')
-            errorObj = new TypeError(UtilsError.typeErrorTemplateMessage('num', 'number'));
+            throw new TypeError(UtilsError.typeErrorTemplateMessage('num', 'number'));
         else if(typeof min !=='number')
-            errorObj = new TypeError(UtilsError.typeErrorTemplateMessage('min', 'number'));
+            throw new TypeError(UtilsError.typeErrorTemplateMessage('min', 'number'));
         else if(typeof max !== 'number')
-            errorObj = new TypeError(UtilsError.typeErrorTemplateMessage('max', 'number'));
+            throw new TypeError(UtilsError.typeErrorTemplateMessage('max', 'number'));
         
-        if(errorObj)
-            throw errorObj;
-        
-        return num < max && num > min;
+        return num <= max && num >= min;
     }
 }

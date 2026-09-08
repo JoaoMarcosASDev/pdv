@@ -1,7 +1,7 @@
 export default {
     name: {
         type: 'string',
-        minCharacLength: 1,
-        maxCharacLength: 50
+        minCharactLength: 1,
+        maxCharactLength: 50
     }
 };
