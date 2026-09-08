@@ -1,21 +1,19 @@
 {
-  "name": "pdv-simple-backend",
-  "version": "1.0.0",
-  "description": "",
-  "license": "MIT",
-  "author": "João Marcos de Andrade Silva",
-  "type": "module",
-  "main": "index.js",
-  "scripts": {
-    "start": "node --watch --env-file-if-exists=.env ./src/index.js",
-    "criarTabelas": "node --env-file-if-exists=.env ./src/model/bdConexao/CriarTabelas.js"
-  },
-  "imports": {
-    "#bdConnection/*.js": "./src/model/dbConnection/*.js",
-    "#errosController/*.js": "./src/controller/erros/*.js",
-    "#model/validations/erros/*.js": "./src/model/validations/erros/Erros.js ",
-    "#model/validations/*.js": "./src/model/validations/*.js",
-    "#Router.js": "./src/controller/Router.js",
-    "#routes/*.js": "./src/controller/routes/*.js"
-  }
+    "name": "pdv-simple-backend",
+    "license": "MIT",
+    "author": "João Marcos de Andrade Silva",
+    "type": "module",
+    "main": "./src/index.js",
+    "scripts": {
+        "start": "node --watch --env-file-if-exists=.env ./src/index.js",
+        "test": "node --test ./tests/*.js"
+    },
+    "imports": {
+        "#bdConnection/*.js": "./src/model/dbConnection/*.js",
+        "#entities/*.js": "./src/model/entites/*.js",
+        "#helper/Helpers.js": "./src/helper/Helpers.js",
+        "#modelValidations/*.js": "./src/model/validations/*.js",
+        "#Router.js": "./src/controller/Router.js",
+        "#routes/*.js": "./src/controller/routes/*.js"
+    }
 }

@@ -1,5 +1,5 @@
 import EventEmitter from 'node:events';
-import EstoqueRouteValidations from '#model/validations/EstoqueRouteValidations.js'
+import EstoqueRouteValidations from '#modelValidations/ProductValidations.js'
 import { json } from 'node:stream/consumers';
 
 const estoqueRoute = new EventEmitter();
