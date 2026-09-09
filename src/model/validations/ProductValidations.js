@@ -16,15 +16,18 @@ export default class {
     }
 
     static validateQuantity(quantity) {
-        const fildName = 'quantity';
+        const fieldName = 'quantity';
+        const quatObj = productEntity.quantity;
 
-        if(typeof quantity !== 'number')
-            throw new TypeError(`The ${fildName} field must be a number type.`);
+        if(typeof quantity !== quatObj.type) 
+            throw new TypeError(`The ${fieldName} field must be a number type.`);
+        if(Number.isNaN(quantity))
+            throw new Error(`NaN is an invalid value! It must be a number greater than or equal to ${quatObj.minQuantity}.`);
         if(!quantity)
             throw new NotNullError(`The ${fieldName} field must be filled out.`);
         else if(Number.isInteger(quantity))
-            throw new TypeError(`The ${fildName} must be a integer number.`);
-        else if(quantity < minQuantityLength)
-            throw new RangeError(`The ${fieldName} must be greater than or equal to ${minQuantityLength}.`);
+            throw new TypeError(`The ${fieldName} must be a integer number.`);
+        else if(quantity < produtEntity.minQuantity)
+            throw new RangeError(`The ${fieldName} must be greater than or equal to ${quatObj.minQuantity}.`);
     }
 }

@@ -25,8 +25,8 @@ export default class {
 
         CREATE TABLE IF NOT EXISTS products (
             id                 INTEGER   PRIMARY KEY,
-            name                TEXT   /*NOT NULL*/ UNIQUE  CHECK(length(name) BETWEEN 1 AND 50),
-            quantity           INTEGER    /*NOT NULL*/      CHECK (quantity >= 0),
+            name                TEXT   NOT NULL UNIQUE  CHECK(length(name) BETWEEN 1 AND 50),
+            quantity           INTEGER    NOT NULL      CHECK (quantity >= 0),
             count              INTEGER                  CHECK(count >= 0),
             weight              REAL                    CHECK(weight >= 0),
             tags                TEXT                    CHECK(length(tags) <= 20),
