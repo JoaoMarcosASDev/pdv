@@ -1,43 +1,43 @@
 import ProductValidations from '#modelValidations/ProductValidations.js'
 import productEntity from '#entities/productEntity.js'; 
 import { describe, it, after } from 'node:test';
+import { throws } from 'node:assert';
 
 describe('quantity', () => {
     const { quantity } = productEntity;
-    describe(`Applying invalid types (The valid type is a ${quantity.type})`, () => {
+    describe(`Applying invalid types - Expected failure (The valid type is a ${quantity.type})`, () => {
         it('String', { expectFailure: true }, () => {
             ProductValidations.validateQuantity('s');
         });
 
-        it('Boolean', { expectFailure: true }, () => {
-
-            ProductValidations.validateQuantity(true);
+        it('Boolean', () => {
+            throws(() => ProductValidations.validateQuantity(true) , { name: 'TypeError' });
         });
 
-        it('Object', { expectFailure: true }, () => {
-            ProductValidations.validateQuantity(new Object());
+        it('Object', () => {
+            throws(() => ProductValidations.validateQuantity(() => new Object()), { name: 'TypeError' });
         });
 
-        it('Undefined', { expectFailure: true }, () => {
-            ProductValidations.validateQuantity(undefined);
+        it('Undefined',  () => {
+            throws(() => ProductValidations.validateQuantity(undefined), { name: 'TypeError' });
         });
 
-        it('Null', { expectFailure: true }, () => {
-            ProductValidations.validateQuantity(null);
+        it('Null', () => {
+            throws(() => ProductValidations.validateQuantity(null), { name: 'TypeError' });
         });
 
-        it('Symbol', { expectFailure: true }, () => {
-            ProductValidations.validateQuantity(Symbol());
+        it('Symbol', () => {
+            throws(() => ProductValidations.validateQuantity(Symbol()), { name: 'TypeError' });
         });
 
-        it('BigInt', { expectFailure: true }, () => {
-            ProductValidations.validateQuantity(BigInt(1));
+        it('BigInt', () => {
+            throws(() => ProductValidations.validateQuantity(BigInt(1)), { name: 'TypeError' });
         });
     });
 
     describe('Argument content', () => {
-        it('NaN (Not-a-Number)', { expectFailure: true }, () => {
-            ProductValidations.validateQuantity(NaN);
+        it('NaN (Not-a-Number)', () => {
+            throws(() => ProductValidations.validateQuantity(NaN), { name: 'Error' });
         });
-    })
+    });
 });
