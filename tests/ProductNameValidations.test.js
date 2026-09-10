@@ -1,40 +1,40 @@
 import ProductValidations from '#modelValidations/ProductValidations.js'
 import productEntity from '#entities/productEntity.js'; 
 import { describe, it, after } from 'node:test';
+import { throws } from 'node:assert/strict';
 
 describe('Testing name validation', (t) => {
     const { name } = productEntity;
     
-
-    describe(`Applying invalid types (The valid type is a ${name.type})`, (t) => {
-        it('Number', { expectFailure: true }, () => {
-            ProductValidations.validateName(1);
+    describe(`Applying invalid types - Expected failure (The valid type is a ${name.type})`, () => {
+        it('Number', () => {
+            throws(() => ProductValidations.validateName(1), { name: 'TypeError' });
         });
 
-        it('Boolean', { expectFailure: true }, () => {
-            ProductValidations.validateName(true)
+        it('Boolean', () => {
+            throws(() => ProductValidations.validateName(true), { name: 'TypeError' });
         });
 
-        it('Object', { expectFailure: true }, () => {
-            ProductValidations.validateName(new Object());
+        it('Object', () => {
+            throws(() => ProductValidations.validateName(new Object()), { name: 'TypeError' });
         });
 
-        it('Null', { expectFailure: true }, () => {
-            ProductValidations.validateName(null);
+        it('Null', () => {
+            throws(() => ProductValidations.validateName(null), { name: 'TypeError' });
         });
 
-        it('Undefined', { expectFailure: true }, () => {
-            ProductValidations.validateName(undefined);
+        it('Undefined', () => {
+            throws(() => ProductValidations.validateName(undefined), { name: 'TypeError' });
         });
 
-        it('Symbol', { expectFailure: true }, () => {
-            ProductValidations.validateName(Symbol());
+        it('Symbol', () => {
+            throws(() => ProductValidations.validateName(Symbol()), { name: 'TypeError' });
         });
     });
     
     describe(`Argument content`, () => {
-        it('Is null', { expectFailure: true }, () => {
-            ProductValidations.validateName('');
+        it('Is null', () => {
+            throws(() => ProductValidations.validateName(''), { name: 'NotNullError' });
         });
 
         describe('Boundery test', () => {
