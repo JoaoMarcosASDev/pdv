@@ -1,6 +1,6 @@
 import ProductValidations from '#modelValidations/ProductValidations.js'
 import productEntity from '#entities/productEntity.js'; 
-import { describe, it, after } from 'node:test';
+import { describe, it } from 'node:test';
 import { throws } from 'node:assert/strict';
 
 describe('Testing name validation', (t) => {
@@ -55,8 +55,8 @@ describe('Testing name validation', (t) => {
             })
         });
 
-        it(`exceed charcter length (The max length is ${ name.maxCharactLength })`, { expectFailure: true }, () => {
-            ProductValidations.validateName('Macarrao Bem Preparo, o melhor que voce vera na sua vida 500kg');
+        it(`exceed character length (The max length is ${ name.maxCharactLength }) - Expected failure`, () => {
+            throws(() => ProductValidations.validateName('Macarrao Bem Preparo, o melhor que voce vera na sua vida 500kg'), { name: 'RangeError' });
         });
     });
 });

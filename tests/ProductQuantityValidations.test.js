@@ -1,9 +1,9 @@
 import ProductValidations from '#modelValidations/ProductValidations.js'
 import productEntity from '#entities/productEntity.js'; 
-import { describe, it, after } from 'node:test';
-import { throws } from 'node:assert';
+import { describe, it } from 'node:test';
+import { throws } from 'node:assert/strict';
 
-describe('quantity', () => {
+describe('Testing quantity validations', () => {
     const { quantity } = productEntity;
     describe(`Applying invalid types - Expected failure (The valid type is a ${quantity.type})`, () => {
         it('String', () => {
@@ -40,6 +40,9 @@ describe('quantity', () => {
             throws(() => ProductValidations.validateQuantity(NaN), { name: 'Error' });
         });
 
+        it('Decimal number - Expected failure', () => {
+            throws(() => ProductValidations.validateQuantity(1.5), { name: 'RangeError' });
+        });
         it('Number minor than zero - Expected failure', () => {
             throws(() => ProductValidations.validateQuantity(-1), { name: 'RangeError' });
             throws(() => ProductValidations.validateQuantity(-40), { name: 'RangeError' });

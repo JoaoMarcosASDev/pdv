@@ -7,5 +7,13 @@ export default {
     quantity: {
         type: 'number',
         minQuantity: 0
+    },
+    count: {
+        type: 'number',
+        minQuantity: 0
+    },
+    weight: {
+        type: 'number',
+        minQuantity: 0
     }
 };
