@@ -19,16 +19,20 @@ describe('Testing name validation', (t) => {
             throws(() => ProductValidations.validateName(new Object()), { name: 'TypeError' });
         });
 
-        it('Null', () => {
-            throws(() => ProductValidations.validateName(null), { name: 'TypeError' });
-        });
-
         it('Undefined', () => {
             throws(() => ProductValidations.validateName(undefined), { name: 'TypeError' });
         });
 
+        it('Null', () => {
+            throws(() => ProductValidations.validateName(null), { name: 'TypeError' });
+        });
+
         it('Symbol', () => {
             throws(() => ProductValidations.validateName(Symbol()), { name: 'TypeError' });
+        });
+
+        it('BigInt', () => {
+            throws(() => ProductValidations.validateName(BigInt(1)), { name: 'TypeError' });
         });
     });
     

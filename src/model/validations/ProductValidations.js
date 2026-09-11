@@ -19,15 +19,15 @@ export default class {
         const fieldName = 'quantity';
         const quatObj = productEntity.quantity;
 
-        if(typeof quantity !== quatObj.type) 
+        if(typeof quantity === 'undefined')
+            throw new NotNullError(`The ${fieldName} field must be filled out.`);
+        else if(typeof quantity !== quatObj.type) 
             throw new TypeError(`The ${fieldName} field must be a number type.`);
         if(Number.isNaN(quantity))
             throw new Error(`NaN is an invalid value! It must be a number greater than or equal to ${quatObj.minQuantity}.`);
-        if(!quantity)
-            throw new NotNullError(`The ${fieldName} field must be filled out.`);
-        else if(Number.isInteger(quantity))
+        else if(!Number.isInteger(quantity))
             throw new TypeError(`The ${fieldName} must be a integer number.`);
-        else if(quantity < produtEntity.minQuantity)
+        if(quantity < quatObj.minQuantity)
             throw new RangeError(`The ${fieldName} must be greater than or equal to ${quatObj.minQuantity}.`);
     }
 }

@@ -6,8 +6,8 @@ import { throws } from 'node:assert';
 describe('quantity', () => {
     const { quantity } = productEntity;
     describe(`Applying invalid types - Expected failure (The valid type is a ${quantity.type})`, () => {
-        it('String', { expectFailure: true }, () => {
-            ProductValidations.validateQuantity('s');
+        it('String', () => {
+            throws(() => ProductValidations.validateQuantity('s'), { name: 'TypeError' });
         });
 
         it('Boolean', () => {
@@ -19,7 +19,7 @@ describe('quantity', () => {
         });
 
         it('Undefined',  () => {
-            throws(() => ProductValidations.validateQuantity(undefined), { name: 'TypeError' });
+            throws(() => ProductValidations.validateQuantity(undefined), { name: 'NotNullError' });
         });
 
         it('Null', () => {
@@ -36,8 +36,22 @@ describe('quantity', () => {
     });
 
     describe('Argument content', () => {
-        it('NaN (Not-a-Number)', () => {
+        it('NaN (Not-a-Number) - Expected failure', () => {
             throws(() => ProductValidations.validateQuantity(NaN), { name: 'Error' });
+        });
+
+        it('Number minor than zero - Expected failure', () => {
+            throws(() => ProductValidations.validateQuantity(-1), { name: 'RangeError' });
+            throws(() => ProductValidations.validateQuantity(-40), { name: 'RangeError' });
+            throws(() => ProductValidations.validateQuantity(-1000), { name: 'RangeError' });
+        });
+        
+        it('Number iguals 0', () => ProductValidations.validateQuantity(0));
+
+        it('Number greater than 0', () => {
+            ProductValidations.validateQuantity(1);
+            ProductValidations.validateQuantity(20);
+            ProductValidations.validateQuantity(5000);
         });
     });
 });
