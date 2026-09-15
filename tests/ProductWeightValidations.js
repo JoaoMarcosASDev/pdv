@@ -24,7 +24,7 @@ describe('Testing weight validations', () => {
         });
 
         it('Null', () => {
-            throws(() => ProductValidations.validateCount(null), { name: 'TypeError' });
+            throws(() => ProductValidations.validateCount(null), { name: 'NotNullError' });
         });
 
         it('Symbol', () => {

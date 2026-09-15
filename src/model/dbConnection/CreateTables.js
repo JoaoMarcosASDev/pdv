@@ -30,7 +30,7 @@ export default class {
             count              INTEGER                  CHECK(count >= 0),
             weight              REAL                    CHECK(weight >= 0),
             tags                TEXT      NOT NULL      CHECK(length(tags) <= 20),
-            sku                 TEXT                    CHECK(length(sku) = 6),
+            sku                 TEXT      NOT NULL      CHECK(length(sku) = 6),
             CONSTRAINT ch_sku_must_not_contains_numbers CHECK(NOT CONTAINSNUM(sku))
          ) STRICT;
     `;

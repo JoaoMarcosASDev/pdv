@@ -3,7 +3,7 @@ import productEntity from '#entities/productEntity.js';
 import { describe, it } from 'node:test';
 import { throws } from 'node:assert/strict';
 
-describe('Testing count validations', () => {
+describe('Testing count validation', () => {
     const { count } = productEntity;
 
     describe(`Applying invalid types - Expected failure (The valid type is a ${count.type})`, () => {
@@ -24,7 +24,7 @@ describe('Testing count validations', () => {
         });
 
         it('Null', () => {
-            throws(() => ProductValidations.validateCount(null), { name: 'TypeError' });
+            throws(() => ProductValidations.validateCount(null), { name: 'NotNullError' });
         });
 
         it('Symbol', () => {

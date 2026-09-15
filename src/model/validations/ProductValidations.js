@@ -5,80 +5,97 @@ import Helpers from '#helper/Helpers.js';
 export default class {
     static validateName(name) {
         const nameObj = productEntity.name;
-        const fieldName = 'name';
+        const fieldNameStr = 'name';
 
-        if(typeof name !== nameObj.type)
-            throw new TypeError(`The ${fieldName} field must be a string ${nameObj.type}.`);
+        if(name === undefined || name === null)
+            throw new NotNullError(Helpers.mustBeFilledOutFieldMsg(fieldNameStr));
+        else if(typeof name !== nameObj.type)
+            throw new TypeError(Helpers.typeErrorMsg(fieldNameStr, nameObj.type));
         else if(!name) 
-            throw new NotNullError(`The ${fieldName} field must be filled out.`);
+            throw new NotNullError(Helpers.mustBeFilledOutFieldMsg(fieldNameStr));
         else if(!Helpers.isBetweenMinMaxRange(name.length, nameObj.minCharactLength, nameObj.maxCharactLength))
-            throw new RangeError(`Invalid Character length in ${ fieldName } field. it must have ${ nameObj.minCharactLength } and ${ nameObj.maxCharactLength }, but the character length is ${ name.length }.`);
+            throw new RangeError(Helpers.invalidCharacterLengthMsg(name.length, fieldNameStr, nameObj.minCharactLength, nameObj.maxCharactLength));
     }
 
     static validateQuantity(quantity) {
-        const fieldName = 'quantity';
+        const fieldNameStr = 'quantity';
         const quatObj = productEntity.quantity;
 
         if(typeof quantity === 'undefined')
-            throw new NotNullError(`The ${ fieldName } field must be filled out.`);
+            throw new NotNullError(Helpers.mustBeFilledOutFieldMsg(fieldNameStr));
         else if(typeof quantity !== quatObj.type) 
-            throw new TypeError(`The ${ fieldName } field must be a number type.`);
+            throw new TypeError(Helpers.typeErrorMsg(fieldNameStr, quatObj.type));
         else if(Number.isNaN(quantity))
-            throw new Error(`NaN is an invalid value! It must be a number greater than or equal to ${quatObj.minQuantity}.`);
+            throw new Error(`${ Helpers.invalidNaNValueMsg() } It must be a number greater than or equal to ${quatObj.minQuantity}.`);
         else if(!Number.isInteger(quantity))
-            throw new RangeError(`The ${ fieldName } must be a integer number.`);
+            throw new RangeError(Helpers.mustBeAIntegerMsg(fieldNameStr));
         else if(quantity < quatObj.minQuantity)
-            throw new RangeError(`The ${ fieldName } must be greater than or equal to ${quatObj.minQuantity}.`);
+            throw new RangeError();
     }
 
     static validateCount(count) {
-        const fieldName = 'count';
+        const fieldNameStr = 'count';
         const countObj = productEntity.count;
 
-        if(count === undefined)
-            throw new NotNullError(`The ${ fieldName } field must be filled out.`);
+        if(count === undefined || count === null)
+            throw new NotNullError(Helpers.mustBeFilledOutFieldMsg(fieldNameStr));
         else if(typeof count !== countObj.type)
-            throw new TypeError(`The ${ fieldName } field must be a number type.`);
+            throw new TypeError(Helpers.typeErrorMsg(fieldNameStr, countObj.type));
         else if(Number.isNaN(count))
-            throw new Error(`NaN is an invalid value! It must be a number greater than or equal to ${countObj.minQuantity}.`);
+            throw new Error(`${ Helpers.invalidNaNValueMsg() } It must be a number greater than or equal to ${countObj.minQuantity}.`);
         else if(!Number.isInteger(count))
-            throw new RangeError(`The ${ fieldName } must be a integer number.`);
+            throw new RangeError(Helpers.mustBeAIntegerMsg(fieldNameStr));
         else if(count < countObj.minQuantity)
-            throw new RangeError(`The ${fieldName} must be greater than or equal to ${countObj.minQuantity}.`);
+            throw new RangeError(Helpers.mustBeGreaterThanOrEqualMsg(fieldNameStr, countObj.minQuantity));
     }
 
     static validateWeight(weight) {
-        const fieldName = 'weight';
+        const fieldNameStr = 'weight';
         const weightObj = productEntity.weight;
 
         if(typeof weight === 'undefined')
-            throw new NotNullError(`The ${fieldName} field must be filled out.`);
+            throw new NotNullError(Helpers.mustBeFilledOutFieldMsg(fieldNameStr));
 
         else if(typeof weight !== weightObj.type)
-            throw new TypeError(`The ${fieldName} field must be a number type.`);
+            throw new TypeError(Helpers.typeErrorMsg(fieldNameStr, weightObj.type));
 
         else if(Number.isNaN(weight))
-            throw new Error(`NaN is an invalid value! It must be a number greater than or equal to ${weightObj.minQuantity}.`);
+            throw new Error(`${ Helpers.invalidNaNValueMsg() } It must be a number greater than or equal to ${weightObj.minQuantity}.`);
 
         else if(weight < weightObj.minQuantity)
-            throw new RangeError(`The ${fieldName} must be greater than or equal to ${weightObj.minQuantity}.`);
+            throw new RangeError(Helpers.mustBeGreaterThanOrEqualMsg(fieldNameStr, weightObj.minQuantity));
     }
     
     //Futuramente implementar as relações com a tabela de tag
     static validateTags(...tagsArr) {
-        const fieldName = 'tags';
+        const fieldNameStr = 'tags';
         const tagsObj = productEntity.tags;
         
         tagsArr.forEach((tag, index) => {
-            if(tag === undefined)
-                throw new NotNullError(`The ${fieldName} field must be filled out.`);
+            if(tag === undefined || null)
+                throw new NotNullError(Helpers.mustBeFilledOutFieldMsg(fieldNameStr));
 
             else if(typeof tag !== 'string')
-                throw new TypeError(`The ${fieldName} field must be string value(s).`)
+                throw new TypeError(Helpers.typeErrorMsg(fieldNameStr, tagsObj.type));
 
             else if(!Helpers.isBetweenMinMaxRange(tag.length, tagsObj.minCharactLength, tagsObj.maxCharactLength)) {
-                throw new RangeError(`Invalid Character length in ${ fieldName } field. it must have ${ tagsObj.minCharactLength } and ${ tagsObj.maxCharactLength }, but the character length is ${ tag.length }.`);
+                throw new RangeError(Helpers.invalidCharacterLengthMsg(tag.length, fieldNameStr));
             }
         });
+    }
+
+    // Deve ser especificado como que o SKU deve ser feito
+    static validateSku(sku) {
+        const fieldNameStr = 'sku';
+        const skuObj = productEntity.sku;
+        
+        if(sku === undefined || sku === null)
+            throw new NotNullError(Helpers.mustBeFilledOutFieldMsg(fieldNameStr));
+        if(typeof sku !== skuObj.type)
+            throw new TypeError(Helpers.typeErrorMsg(fieldNameStr, skuObj.type));
+        if(!sku)
+            throw new NotNullError(Helpers.mustBeFilledOutFieldMsg(fieldNameStr));
+        if(sku.length !== skuObj.minMaxCharactLength)
+            throw new RangeError(Helpers.mustBeExactCharactLength());
     }
 }

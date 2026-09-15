@@ -20,5 +20,9 @@ export default {
         type: 'string',
         minCharactLength: 3,
         maxCharactLength: 20
+    },
+    sku: {
+        type: 'string',
+        minMaxCharactLength: 6
     }
 };

@@ -20,11 +20,11 @@ describe('Testing name validation', (t) => {
         });
 
         it('Undefined', () => {
-            throws(() => ProductValidations.validateName(undefined), { name: 'TypeError' });
+            throws(() => ProductValidations.validateName(undefined), { name: 'NotNullError' });
         });
 
         it('Null', () => {
-            throws(() => ProductValidations.validateName(null), { name: 'TypeError' });
+            throws(() => ProductValidations.validateName(null), { name: 'NotNullError' });
         });
 
         it('Symbol', () => {
@@ -37,7 +37,7 @@ describe('Testing name validation', (t) => {
     });
     
     describe(`Argument content`, () => {
-        it('Is null', () => {
+        it('Is null - Expected failure', () => {
             throws(() => ProductValidations.validateName(''), { name: 'NotNullError' });
         });
 
